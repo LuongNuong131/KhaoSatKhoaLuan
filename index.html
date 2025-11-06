@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Khảo Sát - Làng Hoa Sa Đéc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(102, 126, 234, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(118, 75, 162, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 20%,
+            rgba(240, 147, 251, 0.2) 0%,
+            transparent 40%
+          );
+        animation: gradientShift 15s ease infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+      @keyframes gradientShift {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(1.1);
+        }
+      }
+      .glassmorphism {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .card-hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+      .card-hover:hover::before {
+        left: 100%;
+      }
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+      .section-title {
+        position: relative;
+        display: inline-block;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        border-radius: 2px;
+        animation: expandWidth 0.6s ease-out;
+      }
+      @keyframes expandWidth {
+        from {
+          width: 0;
+        }
+        to {
+          width: 60px;
+        }
+      }
+      .nav-btn {
+        padding: 12px 24px;
+        margin: 0 8px;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        cursor: pointer;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+      }
+      .nav-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+      .nav-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+      .nav-btn:nth-child(1).active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(2).active {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: white;
+        box-shadow: 0 8px 24px rgba(240, 147, 251, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(3).active {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        color: black;
+        box-shadow: 0 8px 24px rgba(79, 172, 254, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(4).active {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+        color: black;
+        box-shadow: 0 8px 24px rgba(67, 233, 123, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(5).active {
+        background: linear-gradient(135deg, #fa709a, #fee140);
+        color: black;
+        box-shadow: 0 8px 24px rgba(250, 112, 154, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(6).active {
+        background: linear-gradient(135deg, #30cfd0, #330867);
+        color: white;
+        box-shadow: 0 8px 24px rgba(48, 207, 208, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:nth-child(7).active {
+        background: linear-gradient(135deg, #f6d365, #fda085);
+        color: black;
+        box-shadow: 0 8px 24px rgba(246, 211, 101, 0.5);
+        transform: scale(1.05);
+      }
+      .nav-btn:not(.active) {
+        background: rgba(255, 255, 255, 0.25);
+        color: black;
+        backdrop-filter: blur(10px);
+      }
+      .nav-btn:not(.active):hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+      .section-content {
+        display: none;
+        animation: fadeInContent 0.5s ease-out;
+      }
+      @keyframes fadeInContent {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .section-content.active {
+        display: block;
+      }
+      .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      .stat-card::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .stat-card p:first-child {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .chart-wrapper {
+        position: relative;
+        height: 300px;
+      }
+      .chart-wrapper-large {
+        position: relative;
+        height: 400px;
+      }
+      .progress-bar {
+        background: #e5e7eb;
+        border-radius: 9999px;
+        height: 8px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        height: 100%;
+        transition: width 0.5s;
+      }
+      .max-w-7xl {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+      <header
+        class="glassmorphism rounded-2xl p-8 mb-8 shadow-2xl animate-fadeInUp"
+      >
+        <div class="text-center">
+          <div class="inline-flex items-center gap-3 mb-3">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <h1
+              class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+            >
+              Dashboard Phân Tích Khảo Sát
+            </h1>
+          </div>
+          <p class="text-gray-700 font-semibold text-lg mb-2">
+            Phát triển sản phẩm du lịch nông nghiệp trải nghiệm
+          </p>
+          <p class="text-gray-600">Làng hoa Sa Đéc, tỉnh Đồng Tháp</p>
+          <p class="text-sm text-gray-500 mt-2">
+            Khóa luận tốt nghiệp - Trường ĐH Công Nghiệp TP.HCM
+          </p>
+        </div>
+      </header>
+
+      <div class="glassmorphism rounded-2xl p-6 mb-8 shadow-xl">
+        <div class="flex flex-wrap justify-center gap-3">
+          <button
+            class="nav-btn active"
+            onclick="showSection('overview', this)"
+          >
+            📊 Tổng quan
+          </button>
+          <button class="nav-btn" onclick="showSection('demographics', this)">
+            👥 Nhân khẩu học
+          </button>
+          <button class="nav-btn" onclick="showSection('behavior', this)">
+            🎯 Hành vi du lịch
+          </button>
+          <button class="nav-btn" onclick="showSection('satisfaction', this)">
+            ⭐ Mức độ hài lòng
+          </button>
+          <button class="nav-btn" onclick="showSection('experience', this)">
+            🌱 Trải nghiệm nông nghiệp
+          </button>
+          <button class="nav-btn" onclick="showSection('future', this)">
+            🚀 Dự định
+          </button>
+          <button class="nav-btn" onclick="showSection('feedback', this)">
+            🗣️ Cảm nhận & Đề xuất
+          </button>
+        </div>
+      </div>
+
+      <div id="overview-section" class="section-content active">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="stat-card rounded-2xl p-6 shadow-xl card-hover">
+            <p class="text-white/80 text-sm font-medium mb-1">Tổng phản hồi</p>
+            <p id="totalResponses" class="text-5xl font-bold">0</p>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <p class="text-gray-600 text-sm font-medium mb-1">
+              Nhóm tuổi phổ biến
+            </p>
+            <p id="popularAgeGroup" class="text-5xl font-bold text-gray-800">
+              N/A
+            </p>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <p class="text-gray-600 text-sm font-medium mb-1">Tỷ lệ hài lòng</p>
+            <p id="satisfactionRate" class="text-5xl font-bold text-green-600">
+              0%
+            </p>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <p class="text-gray-600 text-sm font-medium mb-1">
+              Sẵn sàng quay lại
+            </p>
+            <p id="returnRate" class="text-5xl font-bold text-blue-600">0%</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Top 5 Nghề nghiệp
+            </h3>
+            <div id="topOccupations" class="space-y-3"></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">Top 5 Nơi ở</h3>
+            <div id="topLocations" class="space-y-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="demographics-section" class="section-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <h3 class="section-title text-xl font-bold mb-6">Giới tính</h3>
+            <div class="chart-wrapper"><canvas id="genderChart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <h3 class="section-title text-xl font-bold mb-6">Độ tuổi</h3>
+            <div class="chart-wrapper"><canvas id="ageChart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
+            <h3 class="section-title text-xl font-bold mb-6">Nghề nghiệp</h3>
+            <div class="chart-wrapper">
+              <canvas id="occupationChart"></canvas>
+            </div>
+          </div>
+          <div
+            class="glassmorphism rounded-2xl p-6 shadow-xl card-hover lg:col-span-2 xl:col-span-3"
+          >
+            <h3 class="section-title text-xl font-bold mb-6">Nơi ở hiện tại</h3>
+            <div class="chart-wrapper-large">
+              <canvas id="locationChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="behavior-section" class="section-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Số lần đến Sa Đéc
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="visitFrequencyChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">Đi cùng ai?</h3>
+            <div class="chart-wrapper">
+              <canvas id="companionChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Hình thức du lịch
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="travelTypeChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Thời gian lưu trú
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="stayDurationChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Kênh biết đến Làng hoa
+            </h3>
+            <div class="chart-wrapper-large">
+              <canvas id="sourceChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Mục đích chuyến đi
+            </h3>
+            <div class="chart-wrapper-large">
+              <canvas id="purposeChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Hoạt động đã tham gia
+            </h3>
+            <div class="chart-wrapper-large">
+              <canvas id="activitiesChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="satisfaction-section" class="section-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Sự phong phú loại hoa</h3>
+            <div class="chart-wrapper"><canvas id="sat1Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Sự hiếu khách</h3>
+            <div class="chart-wrapper"><canvas id="sat2Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Cảnh quan & vệ sinh</h3>
+            <div class="chart-wrapper"><canvas id="sat3Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Thái độ nhân viên</h3>
+            <div class="chart-wrapper"><canvas id="sat4Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Cơ sở hạ tầng</h3>
+            <div class="chart-wrapper"><canvas id="sat5Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Nét độc đáo</h3>
+            <div class="chart-wrapper"><canvas id="sat6Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Chất lượng dịch vụ</h3>
+            <div class="chart-wrapper"><canvas id="sat7Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Giá cả dịch vụ</h3>
+            <div class="chart-wrapper"><canvas id="sat8Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Sự an toàn</h3>
+            <div class="chart-wrapper"><canvas id="sat9Chart"></canvas></div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="text-lg font-bold mb-4">Đa dạng hoạt động</h3>
+            <div class="chart-wrapper"><canvas id="sat10Chart"></canvas></div>
+          </div>
+          <div
+            class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2 xl:col-span-3"
+          >
+            <h3 class="text-lg font-bold mb-4">Tính kết nối tour</h3>
+            <div class="chart-wrapper"><canvas id="sat11Chart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="experience-section" class="section-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Quan tâm trải nghiệm nông nghiệp?
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="expInterestChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Mức chi trả mong muốn
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="priceRangeChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="glassmorphism rounded-2xl p-6 shadow-xl mb-6">
+          <h3 class="section-title text-xl font-bold mb-6">
+            Hoạt động trải nghiệm muốn phát triển
+          </h3>
+          <div class="chart-wrapper-large">
+            <canvas id="expActivitiesChart"></canvas>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Yếu tố thu hút tham gia
+            </h3>
+            <div class="chart-wrapper-large">
+              <canvas id="attractionFactorsChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Yếu tố cần cải thiện
+            </h3>
+            <div class="chart-wrapper-large">
+              <canvas id="improvementChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="future-section" class="section-content">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Giới thiệu bạn bè?
+            </h3>
+            <div class="chart-wrapper">
+              <canvas id="referralChart"></canvas>
+            </div>
+          </div>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Dự định quay lại?
+            </h3>
+            <div class="chart-wrapper"><canvas id="returnChart"></canvas></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="feedback-section" class="section-content">
+        <div class="grid grid-cols-1 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Danh sách Cảm nhận & Đề xuất
+            </h3>
+            <div
+              id="feedbackListBox"
+              class="space-y-4 max-h-[600px] overflow-y-auto pr-2"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="mt-8 text-center text-white/80 text-sm">
+        <p>© 2025 Khóa luận tốt nghiệp - Trường ĐH Công Nghiệp TP.HCM</p>
+      </footer>
+    </div>
+
+    <script>
+      const charts = {};
+      const colors = [
+        "#667eea",
+        "#764ba2",
+        "#f093fb",
+        "#4facfe",
+        "#43e97b",
+        "#fa709a",
+        "#fee140",
+        "#30cfd0",
+        "#a8edea",
+        "#fed6e3",
+      ];
+      let globalData = [];
+      let columnMapping = {};
+
+      function showSection(section, element) {
+        document
+          .querySelectorAll(".section-content")
+          .forEach((el) => el.classList.remove("active"));
+        document
+          .querySelectorAll(".nav-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        document.getElementById(`${section}-section`).classList.add("active");
+        element.classList.add("active");
+      }
+
+      document.addEventListener("DOMContentLoaded", loadData);
+
+      async function loadData() {
+        try {
+          console.log("Đang tải dữ liệu từ data.json...");
+          const response = await fetch("data.json");
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const rawData = await response.json();
+          console.log("Dữ liệu thô:", rawData);
+
+          // Kiểm tra định dạng
+          if (Array.isArray(rawData)) {
+            // Định dạng: [mapping, row1, row2, ...]
+            console.log("✓ Định dạng: Array");
+            console.log("Số dòng:", rawData.length);
+
+            if (rawData.length === 0) {
+              throw new Error("File data.json là array rỗng!");
+            }
+
+            columnMapping = rawData[0];
+            console.log("Column mapping:", columnMapping);
+
+            globalData = rawData
+              .slice(1)
+              .map((row) => {
+                const newRow = {};
+                for (const key in row) {
+                  if (columnMapping[key]) {
+                    newRow[columnMapping[key]] = row[key];
+                  }
+                }
+                return newRow;
+              })
+              .filter((row) =>
+                Object.values(row).some(
+                  (v) => v !== "" && v !== null && v !== undefined
+                )
+              );
+          } else if (typeof rawData === "object" && rawData !== null) {
+            // Định dạng: {A: "...", B: "...", ...} - chỉ có mapping
+            console.log("⚠️ Định dạng: Object (chỉ có mapping, không có data)");
+            columnMapping = rawData;
+            globalData = [];
+
+            alert(
+              "⚠️ CẢNH BÁO: File data.json chỉ chứa column mapping!\n\n" +
+                "Định dạng hiện tại:\n" +
+                '{"A": "...", "B": "...", ...}\n\n' +
+                "Định dạng đúng phải là:\n" +
+                "[\n" +
+                '  {"A": "Dấu thời gian", "B": "1. Giới tính:", ...},\n' +
+                '  {"A": "2024-01-01", "B": "Nam", ...},\n' +
+                '  {"A": "2024-01-02", "B": "Nữ", ...}\n' +
+                "]\n\n" +
+                "Dashboard sẽ hiển thị demo data để bạn xem giao diện."
+            );
+
+            // Tạo demo data để hiển thị giao diện
+            globalData = generateDemoData();
+          } else {
+            throw new Error("Định dạng data.json không hợp lệ!");
+          }
+
+          console.log("Dữ liệu đã xử lý:", globalData);
+          console.log("Số bản ghi hợp lệ:", globalData.length);
+
+          if (globalData.length === 0) {
+            alert(
+              "⚠️ Không có dữ liệu!\n\n" +
+                "File data.json cần có định dạng:\n" +
+                "[\n" +
+                '  {"A": "Dấu thời gian", "B": "1. Giới tính:", ...},  // Row 0: Column mapping\n' +
+                '  {"A": "2024-01-01 10:00", "B": "Nam", "C": "18-25", ...},  // Row 1: Data\n' +
+                '  {"A": "2024-01-01 11:00", "B": "Nữ", "C": "26-35", ...}   // Row 2: Data\n' +
+                "]\n\n" +
+                "Hiển thị demo data..."
+            );
+            globalData = generateDemoData();
+          }
+
+          processAllData();
+          console.log("✅ Tải dữ liệu thành công!");
+        } catch (error) {
+          console.error("❌ Lỗi chi tiết:", error);
+          alert(
+            `Không thể tải dữ liệu!\n\nLỗi: ${error.message}\n\n` +
+              `Vui lòng:\n` +
+              `1. Kiểm tra file data.json có cùng thư mục với file HTML\n` +
+              `2. Đảm bảo định dạng là Array: [mapping, data1, data2, ...]\n` +
+              `3. Mở Console (F12) để xem chi tiết\n\n` +
+              `Hiển thị demo data...`
+          );
+
+          // Load demo data khi có lỗi
+          columnMapping = {
+            A: "Dấu thời gian",
+            B: "1. Giới tính:",
+            C: "2. Độ tuổi:",
+            D: "3. Nơi ở hiện tại:",
+            E: "4. Nghề nghiệp của Anh/Chị:",
+            // Thêm các key khác nếu demo data cần
+            F: "5. Anh/Chị đã đến Làng hoa Sa Đéc bao nhiêu lần?",
+            G: "6. Anh/Chị biết đến Làng hoa Sa Đéc thông qua kênh thông tin nào? (Có thể chọn nhiều đáp án)",
+            H: "7. Anh/Chị đi du lịch với ai?",
+            I: "8. Mục đích của Anh/Chị khi đến Làng hoa Sa Đéc là gì? (Có thể chọn nhiều đáp án)",
+            J: "9. Anh/Chị đi du lịch theo hình thức nào? ",
+            K: "10. Thời gian lưu trú của Anh/Chị tại Sa Đéc là bao lâu? ",
+            L: "11. Anh/Chị đã tham gia những hoạt động nào tại Sa Đéc? (Có thể chọn nhiều đáp án)",
+            M: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự phong phú của các loại hoa]",
+            N: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự hiếu khách của người dân địa phương]",
+            O: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cảnh quan, vệ sinh môi trường]",
+            P: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Thái độ phục vụ của nhân viên]",
+            Q: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cơ sở hạ tầng]",
+            R: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Nét riêng biệt/độc đáo của điểm đến]",
+            S: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Chất lượng dịch vụ]",
+            T: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Giá cả dịch vụ]",
+            U: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự an toàn trong quá trình trải nghiệm]",
+            V: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự đa dạng của các hoạt động trải nghiệm]",
+            W: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Tính kết nối giữa các điểm tham quan trong khu vực Sa Đéc (liên kết tour, tuyến, cơ sở lưu trú, ẩm thực)]",
+            X: '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?',
+            Y: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]",
+            Z: '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]',
+            AA: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]",
+            AB: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]",
+            AC: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]",
+            AD: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]",
+            AE: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]",
+            AF: "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?",
+            AG: "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)",
+            AH: "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ",
+            AI: "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ",
+            AJ: "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”",
+            AK: "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?",
+            AL: "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?",
+          };
+          globalData = generateDemoData();
+          processAllData();
+        }
+      }
+
+      function generateDemoData() {
+        // Tạo 50 mẫu dữ liệu demo
+        const genders = ["Nam", "Nữ"];
+        const ages = ["18-25", "26-35", "36-45", "46-55", "Trên 55"];
+        const locations = [
+          "TP.HCM",
+          "Hà Nội",
+          "Đồng Tháp",
+          "Cần Thơ",
+          "An Giang",
+          "Vĩnh Long",
+        ];
+        const occupations = [
+          "Sinh viên",
+          "Nhân viên văn phòng",
+          "Kinh doanh",
+          "Giáo viên",
+          "Tự do",
+          "Hưu trí",
+        ];
+        const visits = ["Lần đầu", "2-3 lần", "4-5 lần", "Trên 5 lần"];
+        const companions = [
+          "Một mình",
+          "Gia đình",
+          "Bạn bè",
+          "Đồng nghiệp",
+          "Tour du lịch",
+        ];
+        const travelTypes = [
+          "Tự túc",
+          "Tour trọn gói",
+          "Tour trọn gói",
+          "Kết hợp",
+        ];
+        const durations = [
+          "Nửa ngày",
+          "1 ngày",
+          "2 ngày 1 đêm",
+          "3 ngày 2 đêm",
+        ];
+        const satisfactions = [
+          "Rất hài lòng",
+          "Hài lòng",
+          "Bình thường",
+          "Không hài lòng",
+        ];
+        const interests = [
+          "Rất quan tâm",
+          "Quan tâm",
+          "Bình thường",
+          "Không quan tâm",
+        ];
+        const prices = [
+          "100.000 - 200.000 VNĐ",
+          "200.000 - 300.000 VNĐ",
+          "300.000 - 500.000 VNĐ",
+          "Trên 500.000 VNĐ",
+        ];
+        const yesNo = ["Có", "Không"];
+
+        const demoData = [];
+        for (let i = 0; i < 50; i++) {
+          demoData.push({
+            "Dấu thời gian": `2024-11-${String((i % 30) + 1).padStart(
+              2,
+              "0"
+            )} ${String(Math.floor(Math.random() * 24)).padStart(
+              2,
+              "0"
+            )}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}`,
+            "1. Giới tính:":
+              genders[Math.floor(Math.random() * genders.length)],
+            "2. Độ tuổi:": ages[Math.floor(Math.random() * ages.length)],
+            "3. Nơi ở hiện tại:":
+              locations[Math.floor(Math.random() * locations.length)],
+            "4. Nghề nghiệp của Anh/Chị:":
+              occupations[Math.floor(Math.random() * occupations.length)],
+            "5. Anh/Chị đã đến Làng hoa Sa Đéc bao nhiêu lần?":
+              visits[Math.floor(Math.random() * visits.length)],
+            "6. Anh/Chị biết đến Làng hoa Sa Đéc thông qua kênh thông tin nào? (Có thể chọn nhiều đáp án)":
+              "Mạng xã hội, Bạn bè/người thân giới thiệu",
+            "7. Anh/Chị đi du lịch với ai?":
+              companions[Math.floor(Math.random() * companions.length)],
+            "8. Mục đích của Anh/Chị khi đến Làng hoa Sa Đéc là gì? (Có thể chọn nhiều đáp án)":
+              "Du lịch nghỉ dưỡng, Chụp ảnh",
+            "9. Anh/Chị đi du lịch theo hình thức nào? ":
+              travelTypes[Math.floor(Math.random() * travelTypes.length)],
+            "10. Thời gian lưu trú của Anh/Chị tại Sa Đéc là bao lâu? ":
+              durations[Math.floor(Math.random() * durations.length)],
+            "11. Anh/Chị đã tham gia những hoạt động nào tại Sa Đéc? (Có thể chọn nhiều đáp án)":
+              "Tham quan vườn hoa, Chụp ảnh, Mua hoa",
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự phong phú của các loại hoa]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự hiếu khách của người dân địa phương]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cảnh quan, vệ sinh môi trường]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Thái độ phục vụ của nhân viên]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cơ sở hạ tầng]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Nét riêng biệt/độc đáo của điểm đến]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Chất lượng dịch vụ]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Giá cả dịch vụ]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự an toàn trong quá trình trải nghiệm]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự đa dạng của các hoạt động trải nghiệm]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Tính kết nối giữa các điểm tham quan trong khu vực Sa Đéc (liên kết tour, tuyến, cơ sở lưu trú, ẩm thực)]":
+              satisfactions[Math.floor(Math.random() * satisfactions.length)],
+            '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?':
+              interests[Math.floor(Math.random() * 2)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]":
+              interests[Math.floor(Math.random() * interests.length)],
+            '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]':
+              interests[Math.floor(Math.random() * interests.length)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]":
+              interests[Math.floor(Math.random() * interests.length)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]":
+              interests[Math.floor(Math.random() * interests.length)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]":
+              interests[Math.floor(Math.random() * interests.length)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]":
+              interests[Math.floor(Math.random() * interests.length)],
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]":
+              interests[Math.floor(Math.random() * interests.length)],
+            "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?":
+              prices[Math.floor(Math.random() * prices.length)],
+            "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)":
+              "Tính độc đáo của hoạt động, Giá cả hợp lý",
+            "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ":
+              "Cải thiện cơ sở vật chất, Tăng cường quảng bá",
+            "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ":
+              yesNo[Math.floor(Math.random() * yesNo.length)],
+            // *** ĐÂY LÀ CHỖ FIX ***
+            "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”":
+              yesNo[Math.floor(Math.random() * yesNo.length)],
+            "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?":
+              "Rất thích! Hoa đẹp, không khí trong lành.",
+            "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?":
+              "Nên có thêm các hoạt động tương tác.",
+          });
+        }
+
+        console.log("✓ Đã tạo 50 mẫu demo data");
+        return demoData;
+      }
+
+      function processAllData() {
+        const d = globalData;
+
+        document.getElementById("totalResponses").textContent = d.length;
+
+        if (d.length === 0) {
+          console.warn("Không có dữ liệu khảo sát để xử lý.");
+          document.getElementById("popularAgeGroup").textContent = "N/A";
+          return;
+        }
+
+        // Stats
+        const ageCounts = {};
+        d.forEach((row) => {
+          const ageGroup = row["2. Độ tuổi:"];
+          if (ageGroup) {
+            ageCounts[ageGroup] = (ageCounts[ageGroup] || 0) + 1;
+          }
+        });
+
+        let popularAgeGroup = "N/A";
+        let maxCount = 0;
+        for (const ageGroup in ageCounts) {
+          if (ageCounts[ageGroup] > maxCount) {
+            maxCount = ageCounts[ageGroup];
+            popularAgeGroup = ageGroup;
+          }
+        }
+        document.getElementById("popularAgeGroup").textContent =
+          popularAgeGroup;
+
+        // Satisfaction rate
+        const satKeys = Object.keys(d[0]).filter((k) =>
+          k.includes("12. Anh/Chị vui lòng đánh giá")
+        );
+        let satisfiedTotal = 0,
+          satCount = 0;
+        d.forEach((row) => {
+          satKeys.forEach((key) => {
+            const val = row[key];
+            if (val) {
+              satCount++;
+              if (val === "Rất hài lòng" || val === "Hài lòng")
+                satisfiedTotal++;
+            }
+          });
+        });
+        const satRate =
+          satCount > 0 ? ((satisfiedTotal / satCount) * 100).toFixed(1) : "0";
+        document.getElementById("satisfactionRate").textContent = satRate + "%";
+
+        // Return rate
+        // *** ĐÂY LÀ CHỖ FIX ***
+        const returnKey =
+          "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"; // Phải dùng smart quote "”"
+        const returnYes = d.filter((row) => {
+          const val = row[returnKey];
+          return (
+            val &&
+            (val.toLowerCase().includes("có") ||
+              val.toLowerCase().includes("chắc chắn"))
+          );
+        }).length;
+        const returnRate = ((returnYes / d.length) * 100).toFixed(1);
+        document.getElementById("returnRate").textContent = returnRate + "%";
+
+        // Top occupations and locations
+        renderTopList(d, "4. Nghề nghiệp của Anh/Chị:", "topOccupations");
+        renderTopList(d, "3. Nơi ở hiện tại:", "topLocations");
+
+        // Demographics
+        renderPieChart(d, "B", "genderChart", "doughnut");
+        renderBarChart(d, "C", "ageChart");
+        renderBarChart(d, "E", "occupationChart", true);
+        renderBarChart(d, "D", "locationChart", true);
+
+        // Behavior
+        renderPieChart(d, "F", "visitFrequencyChart", "pie");
+        renderPieChart(d, "H", "companionChart", "doughnut");
+        renderPieChart(d, "J", "travelTypeChart", "polarArea");
+        renderBarChart(d, "K", "stayDurationChart");
+        renderMultiChart(d, "G", "sourceChart");
+        renderMultiChart(d, "I", "purposeChart");
+        renderMultiChart(d, "L", "activitiesChart");
+
+        // Satisfaction (11 charts)
+        const satOrder = [
+          "Rất hài lòng",
+          "Hài lòng",
+          "Bình thường",
+          "Không hài lòng",
+          "Rất không hài lòng",
+        ];
+        renderOrderedChart(d, "M", "sat1Chart", satOrder);
+        renderOrderedChart(d, "N", "sat2Chart", satOrder);
+        renderOrderedChart(d, "O", "sat3Chart", satOrder);
+        renderOrderedChart(d, "P", "sat4Chart", satOrder);
+        renderOrderedChart(d, "Q", "sat5Chart", satOrder);
+        renderOrderedChart(d, "R", "sat6Chart", satOrder);
+        renderOrderedChart(d, "S", "sat7Chart", satOrder);
+        renderOrderedChart(d, "T", "sat8Chart", satOrder);
+        renderOrderedChart(d, "U", "sat9Chart", satOrder);
+        renderOrderedChart(d, "V", "sat10Chart", satOrder);
+        renderOrderedChart(d, "W", "sat11Chart", satOrder);
+
+        // Experience
+        renderPieChart(d, "X", "expInterestChart", "doughnut");
+        renderBarChart(d, "AF", "priceRangeChart");
+
+        const expCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
+        renderMultiColChart(d, expCols, "expActivitiesChart");
+
+        renderMultiChart(d, "AG", "attractionFactorsChart");
+        renderMultiChart(d, "AH", "improvementChart");
+
+        // Future
+        renderPieChart(d, "AI", "referralChart", "doughnut");
+        renderPieChart(d, "AJ", "returnChart", "doughnut");
+
+        // Feedback
+        renderFeedbackList(d, "AK", "AL", "feedbackListBox");
+      }
+
+      function getColumnByLetter(letter) {
+        // Kiểm tra xem mapping đã được tải chưa
+        if (Object.keys(columnMapping).length === 0) {
+          console.error("Column mapping chưa được tải!");
+          return null; // Trả về null nếu mapping chưa sẵn sàng
+        }
+        // Trả về tên cột đầy đủ từ mapping
+        const colName = columnMapping[letter];
+        if (!colName) {
+          console.warn(`Không tìm thấy mapping cho chữ cái: ${letter}`);
+          return null;
+        }
+        return colName;
+      }
+
+      function renderTopList(data, colName, elementId, top = 5) {
+        if (!colName) return; // Thêm kiểm tra
+        const counts = {};
+        data.forEach((row) => {
+          const val = row[colName];
+          if (val) counts[val] = (counts[val] || 0) + 1;
+        });
+        const sorted = Object.entries(counts)
+          .sort(([, a], [, b]) => b - a)
+          .slice(0, top);
+        const max = sorted[0] ? sorted[0][1] : 1;
+
+        const html = sorted
+          .map(
+            ([label, count], i) => `
+                <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-medium text-sm text-gray-800">${label}</span>
+                        <span class="text-sm text-gray-600">${count} người</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${
+                          (count / max) * 100
+                        }%; background: ${colors[i % colors.length]}"></div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+        document.getElementById(elementId).innerHTML = html;
+      }
+
+      function renderPieChart(data, colLetter, canvasId, type) {
+        const colName = getColumnByLetter(colLetter);
+        if (!colName) {
+          console.error(`(Pie) Không tìm thấy cột cho chữ cái: ${colLetter}`);
+          return;
+        }
+
+        const counts = {};
+        data.forEach((row) => {
+          const val = row[colName];
+          if (val) counts[val] = (counts[val] || 0) + 1;
+        });
+
+        createChart(
+          canvasId,
+          type,
+          Object.keys(counts),
+          Object.values(counts),
+          true
+        );
+      }
+
+      function renderBarChart(data, colLetter, canvasId, sort = false) {
+        const colName = getColumnByLetter(colLetter);
+        if (!colName) {
+          console.error(`(Bar) Không tìm thấy cột cho chữ cái: ${colLetter}`);
+          return;
+        }
+
+        const counts = {};
+        data.forEach((row) => {
+          const val = row[colName];
+          if (val) counts[val] = (counts[val] || 0) + 1;
+        });
+
+        let entries = Object.entries(counts);
+        if (sort) entries = entries.sort(([, a], [, b]) => b - a);
+
+        createChart(
+          canvasId,
+          "bar",
+          entries.map((e) => e[0]),
+          entries.map((e) => e[1]),
+          false
+        );
+      }
+
+      function renderOrderedChart(data, colLetter, canvasId, order) {
+        const colName = getColumnByLetter(colLetter);
+        if (!colName) {
+          console.error(
+            `(Ordered) Không tìm thấy cột cho chữ cái: ${colLetter}`
+          );
+          return;
+        }
+
+        const counts = {};
+        data.forEach((row) => {
+          const val = row[colName];
+          if (val) counts[val] = (counts[val] || 0) + 1;
+        });
+
+        const labels = order;
+        const values = order.map((label) => counts[label] || 0);
+
+        createChart(canvasId, "bar", labels, values, false);
+      }
+
+      function renderMultiChart(data, colLetter, canvasId) {
+        const colName = getColumnByLetter(colLetter);
+        if (!colName) {
+          console.error(`(Multi) Không tìm thấy cột cho chữ cái: ${colLetter}`);
+          return;
+        }
+
+        const counts = {};
+        data.forEach((row) => {
+          const val = row[colName];
+          if (val) {
+            val
+              .split(",")
+              .map((v) => v.trim())
+              .forEach((item) => {
+                if (item) counts[item] = (counts[item] || 0) + 1;
+              });
+          }
+        });
+
+        const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
+        createChart(
+          canvasId,
+          "bar",
+          sorted.map((e) => e[0]),
+          sorted.map((e) => e[1]),
+          false,
+          true
+        );
+      }
+
+      function renderMultiColChart(data, colLetters, canvasId) {
+        const counts = {};
+
+        colLetters.forEach((letter) => {
+          const colName = getColumnByLetter(letter);
+          if (!colName) {
+            console.error(
+              `(MultiCol) Không tìm thấy cột cho chữ cái: ${letter}`
+            );
+            return;
+          }
+
+          data.forEach((row) => {
+            const val = row[colName];
+            if (
+              val &&
+              (val === "Rất quan tâm" ||
+                val === "Quan tâm" ||
+                val.toLowerCase().includes("có"))
+            ) {
+              const activityMatch = colName.match(/\[(.*?)\]/);
+              if (activityMatch) {
+                const activity = activityMatch[1];
+                counts[activity] = (counts[activity] || 0) + 1;
+              }
+            }
+          });
+        });
+
+        const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
+        createChart(
+          canvasId,
+          "bar",
+          sorted.map((e) => e[0]),
+          sorted.map((e) => e[1]),
+          false,
+          true
+        );
+      }
+
+      function renderFeedbackList(
+        data,
+        feelingColLetter,
+        suggestionColLetter,
+        elementId
+      ) {
+        const feelingCol = getColumnByLetter(feelingColLetter);
+        const suggestionCol = getColumnByLetter(suggestionColLetter);
+        const container = document.getElementById(elementId);
+
+        if (!feelingCol || !suggestionCol || !container) {
+          console.error(
+            "Không tìm thấy cột hoặc element cho danh sách feedback."
+          );
+          return;
+        }
+
+        const feedbackItems = data
+          .map((row, i) => {
+            const feeling = row[feelingCol] || null;
+            const suggestion = row[suggestionCol] || null;
+
+            if (feeling || (suggestion && suggestion.trim().length > 5)) {
+              return `
+                <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
+                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                            <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
+                            <p class="mt-1">${
+                              feeling || "<em>(Không có)</em>"
+                            }</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
+                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                            <strong class="text-gray-900">Đề xuất:</strong>
+                            <p class="mt-1">${
+                              suggestion || "<em>(Không có)</em>"
+                            }</p>
+                        </div>
+                    </div>
+                </div>
+              `;
+            }
+            return "";
+          })
+          .join("");
+
+        container.innerHTML =
+          feedbackItems.length > 0
+            ? feedbackItems
+            : '<p class="text-gray-500 text-center py-8">Chưa có cảm nhận hoặc đề xuất nào.</p>';
+      }
+
+      function createChart(
+        canvasId,
+        type,
+        labels,
+        data,
+        isPie = false,
+        horizontal = false
+      ) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) {
+          console.error(`Không tìm thấy canvas: ${canvasId}`);
+          return;
+        }
+
+        if (charts[canvasId]) charts[canvasId].destroy();
+
+        const ctx = canvas.getContext("2d");
+
+        const config = {
+          type: horizontal ? "bar" : type,
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Số lượng",
+                data: data,
+                backgroundColor: isPie
+                  ? labels.map((_, i) => colors[i % colors.length])
+                  : labels.map((_, i) => colors[i % colors.length] + "90"),
+                borderColor: isPie
+                  ? "#fff"
+                  : labels.map((_, i) => colors[i % colors.length]),
+                borderWidth: isPie ? 2 : 2,
+                borderRadius: isPie ? 0 : 8,
+                hoverOffset: isPie ? 15 : 0,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: isPie,
+                position: "bottom",
+                labels: {
+                  padding: 12,
+                  font: { size: 11, weight: "500" },
+                  usePointStyle: true,
+                  boxWidth: 12,
+                  color: "#333",
+                },
+              },
+              tooltip: {
+                backgroundColor: "rgba(0, 0, 0, 0.85)",
+                padding: 12,
+                titleFont: { size: 13, weight: "bold" },
+                bodyFont: { size: 12 },
+                cornerRadius: 8,
+                displayColors: true,
+              },
+            },
+            scales: isPie
+              ? {}
+              : {
+                  x: {
+                    display: true,
+                    grid: { display: false },
+                    ticks: {
+                      font: { size: 10 },
+                      autoSkip: false,
+                      maxRotation: horizontal ? 0 : 45,
+                      minRotation: horizontal ? 0 : 45,
+                      color: "#333",
+                    },
+                  },
+                  y: {
+                    display: true,
+                    beginAtZero: true,
+                    grid: {
+                      color: "rgba(0, 0, 0, 0.05)",
+                      drawBorder: false,
+                    },
+                    ticks: {
+                      font: { size: 10 },
+                      precision: 0,
+                      color: "#333",
+                    },
+                  },
+                },
+          },
+        };
+
+        if (horizontal) {
+          config.options.indexAxis = "y";
+          config.options.scales.x.beginAtZero = true;
+          config.options.scales.y.ticks.autoSkip = false;
+        }
+
+        charts[canvasId] = new Chart(ctx, config);
+      }
+    </script>
+  </body>
+</html>
