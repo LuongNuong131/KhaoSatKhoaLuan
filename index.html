@@ -223,7 +223,7 @@
       }
       .chart-wrapper-large {
         position: relative;
-        height: 400px;
+        height: 600px; /* Đã fix chiều cao */
       }
       .progress-bar {
         background: #e5e7eb;
@@ -834,7 +834,6 @@
             console.log("Số dòng:", rawData.length);
 
             if (rawData.length < 2) {
-              // Cần ít nhất 2 dòng (header + data)
               throw new Error(
                 "File data.json không có dữ liệu (chỉ có header)!"
               );
@@ -924,7 +923,7 @@
             AG: "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)",
             AH: "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ",
             AI: "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ",
-            AJ: 'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"', // Giữ nguyên key lỗi của demo
+            AJ: 'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"',
             AK: "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?",
             AL: "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?",
           };
@@ -1081,6 +1080,54 @@
         return demoData;
       }
 
+      // ============================================================
+      // START FIX 1: HÀM TÁCH CÂU TRẢ LỜI THÔNG MINH (THEO LOGIC CỦA BẠN)
+      // ============================================================
+      function smartSplitAnswers(text) {
+        if (!text) return [];
+
+        // 1. Tách bằng dấu phẩy như cũ
+        const parts = text.split(",");
+        const results = [];
+        let currentAnswer = "";
+
+        for (let i = 0; i < parts.length; i++) {
+          const part = parts[i].trim();
+          if (!part) continue; // Bỏ qua nếu có,,
+
+          if (currentAnswer === "") {
+            // Đây là phần tử đầu tiên, luôn là bắt đầu của một câu trả lời
+            currentAnswer = part;
+          } else {
+            // 2. Kiểm tra ký tự đầu tiên
+            const firstChar = part.charAt(0);
+            const isUpperCase =
+              firstChar === firstChar.toUpperCase() &&
+              firstChar !== firstChar.toLowerCase();
+
+            // 3. Nếu là CHỮ HOA và độ dài > 3
+            if (isUpperCase && part.length > 3) {
+              // 4. Đây là câu trả lời mới
+              results.push(currentAnswer); // Đẩy câu trả lời cũ vào
+              currentAnswer = part; // Bắt đầu câu mới
+            } else {
+              // 5. Nếu là chữ thường -> là phần tiếp theo
+              currentAnswer += ", " + part; // Nối vào câu hiện tại
+            }
+          }
+        }
+
+        // Đừng quên đẩy câu trả lời cuối cùng vào
+        if (currentAnswer) {
+          results.push(currentAnswer);
+        }
+
+        return results.filter((item) => item && item.length > 0);
+      }
+      // ============================================================
+      // END FIX 1
+      // ============================================================
+
       function processAllData() {
         const d = globalData;
         document.getElementById("totalResponses").textContent = d.length;
@@ -1091,7 +1138,6 @@
           return;
         }
 
-        // Stats
         const ageCounts = {};
         d.forEach((row) => {
           const ageGroup = row["2. Độ tuổi:"];
@@ -1109,7 +1155,6 @@
         document.getElementById("popularAgeGroup").textContent =
           popularAgeGroup;
 
-        // Satisfaction rate
         const satKeys = Object.keys(d[0]).filter((k) =>
           k.includes("12. Anh/Chị vui lòng đánh giá")
         );
@@ -1130,21 +1175,22 @@
         document.getElementById("satisfactionRate").textContent = satRate + "%";
 
         // ==================================================
-        // START FIX 2: Sửa logic thẻ "Sẵn sàng quay lại" (Cột AJ)
+        // START FIX 2: Sửa logic thẻ thống kê (Cột AJ, X, AI, AF)
         // ==================================================
-        // Return rate
-        const returnKey =
-          'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"'; // Key từ JSON header (có dấu ”" ở cuối)
 
-        // KIỂM TRA NẾU KEY TRÊN KHÔNG ĐÚNG (do file data.json mới)
+        // Return rate (Cột AJ)
+        // Key này lấy từ file data.json BẠN MỚI GỬI (kết thúc bằng ?")
+        const returnKey =
+          "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”";
+
         let actualReturnKey = returnKey;
         if (!globalData[0].hasOwnProperty(returnKey)) {
-          // Thử key đã sửa (bỏ bớt 1 dấu ")
-          const fixedKey =
-            "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”";
-          if (globalData[0].hasOwnProperty(fixedKey)) {
-            actualReturnKey = fixedKey;
-            console.log("Đã tự động sửa key 'Quay lại' (AJ).");
+          // Thử key cũ (demo)
+          const oldKey =
+            'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"';
+          if (globalData[0].hasOwnProperty(oldKey)) {
+            actualReturnKey = oldKey;
+            console.log("Đã tự động sửa key 'Quay lại' (AJ) về key demo.");
           } else {
             console.error("Không tìm thấy key cho cột AJ (Quay lại)!");
           }
@@ -1154,23 +1200,18 @@
           const val = row[actualReturnKey];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
-          // Chỉ chấp nhận "có" hoặc "chắc chắn"
           return valLower.includes("có") || valLower.includes("chắc chắn");
         }).length;
         const returnRate = ((returnYes / d.length) * 100).toFixed(1);
         document.getElementById("returnRate").textContent = returnRate + "%";
-        // ==================================================
-        // END FIX 2
-        // ==================================================
 
-        // Experience interest
+        // Experience interest (Cột X)
         const expKey =
           '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?';
         const expYes = d.filter((row) => {
           const val = row[expKey];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
-          // Chấp nhận "quan tâm", "rất", "4", "5"
           return (
             valLower.includes("quan tâm") ||
             valLower.includes("rất") ||
@@ -1182,14 +1223,13 @@
         document.getElementById("expInterestPercent").textContent =
           expRate + "%";
 
-        // Referral rate
+        // Referral rate (Cột AI)
         const refKey =
           "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ";
         const refYes = d.filter((row) => {
           const val = row[refKey];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
-          // Chấp nhận "có", "4", "5"
           return (
             valLower.includes("có") || valLower === "4" || valLower === "5"
           );
@@ -1197,17 +1237,14 @@
         const refRate = ((refYes / d.length) * 100).toFixed(1);
         document.getElementById("referralPercent").textContent = refRate + "%";
 
-        // ==================================================
-        // START FIX 3: Sửa logic "Mức giá" (Cột AF)
-        // ==================================================
-        // Average price
+        // Average price (Cột AF)
         const priceKey =
           "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?";
         const priceRanges = {
           "100.000 - 200.000 VNĐ": 150000,
           "200.000 - 300.000 VNĐ": 250000,
-          "Trên 300.000 VNĐ": 350000, // Đã cập nhật
-          "Dưới 100.000 VNĐ": 80000, // Đã cập nhật
+          "Trên 300.000 VNĐ": 350000,
+          "Dưới 100.000 VNĐ": 80000,
         };
         let totalPrice = 0,
           priceCount = 0;
@@ -1223,20 +1260,17 @@
         document.getElementById("avgPrice").textContent =
           avgPrice > 0 ? (avgPrice / 1000).toFixed(0) + "K VNĐ" : "N/A";
         // ==================================================
-        // END FIX 3
+        // END FIX 2
         // ==================================================
 
-        // Top lists
         renderTopList(d, "4. Nghề nghiệp của Anh/Chị:", "topOccupations");
         renderTopList(d, "3. Nơi ở hiện tại:", "topLocations");
 
-        // Demographics
         renderPieChart(d, "B", "genderChart", "doughnut");
         renderBarChart(d, "C", "ageChart");
         renderBarChart(d, "E", "occupationChart", true);
         renderBarChart(d, "D", "locationChart", true);
 
-        // Behavior
         renderPieChart(d, "F", "visitFrequencyChart", "pie");
         renderPieChart(d, "H", "companionChart", "doughnut");
         renderPieChart(d, "J", "travelTypeChart", "polarArea");
@@ -1245,7 +1279,6 @@
         renderMultiChart(d, "I", "purposeChart");
         renderMultiChart(d, "L", "activitiesChart");
 
-        // Satisfaction (11 charts)
         const satOrder = [
           "Rất hài lòng",
           "Hài lòng",
@@ -1265,13 +1298,12 @@
         renderOrderedChart(d, "V", "sat10Chart", satOrder);
         renderOrderedChart(d, "W", "sat11Chart", satOrder);
 
-        // Experience
         const interestMapping = {
           5: "Rất quan tâm",
           4: "Quan tâm",
           3: "Bình thường",
           2: "Không quan tâm",
-          1: "Rất không quan tâm",
+          1: "Hoàn toàn không quan tâm",
         };
         renderMappedPieChart(
           d,
@@ -1288,7 +1320,6 @@
         renderMultiChart(d, "AG", "attractionFactorsChart");
         renderMultiChart(d, "AH", "improvementChart");
 
-        // Future
         const referralMapping = {
           5: "Rất sẵn lòng",
           4: "Sẵn lòng",
@@ -1304,10 +1335,8 @@
           referralMapping
         );
 
-        // Cột AJ (return) đã là "Có/Không", nên renderPieChart gốc là ĐÚNG
         renderPieChart(d, "AJ", "returnChart", "doughnut");
 
-        // Feedback
         renderFeedbackList(d, "AK", "AL", "feedbackListBox");
       }
 
@@ -1424,9 +1453,9 @@
         createChart(canvasId, "bar", labels, values, false);
       }
 
-      // ==================================================
-      // START FIX 1: Sửa lỗi tách câu
-      // ==================================================
+      // ============================================================
+      // HÀM RENDER MULTI CHART - ĐÃ CẬP NHẬT SỬ DỤNG SMART SPLIT
+      // ============================================================
       function renderMultiChart(data, colLetter, canvasId) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -1438,14 +1467,11 @@
         data.forEach((row) => {
           const val = row[colName];
           if (val) {
-            // Sửa lỗi: Tách bằng ", " (dấu phẩy + DẤU CÁCH)
-            // Đây là ký tự phân tách chuẩn của Google Forms cho nhiều lựa chọn
-            val
-              .split(", ") // <--- ĐÂY LÀ DÒNG ĐÃ SỬA
-              .map((v) => v.trim())
-              .forEach((item) => {
-                if (item) counts[item] = (counts[item] || 0) + 1;
-              });
+            // SỬ DỤNG HÀM TÁCH THÔNG MINH
+            const answers = smartSplitAnswers(val);
+            answers.forEach((item) => {
+              if (item) counts[item] = (counts[item] || 0) + 1;
+            });
           }
         });
 
@@ -1459,9 +1485,6 @@
           true
         );
       }
-      // ==================================================
-      // END FIX 1
-      // ==================================================
 
       function renderMultiColChart(data, colLetters, canvasId) {
         const counts = {};
@@ -1477,11 +1500,10 @@
 
           data.forEach((row) => {
             const val = row[colName];
+            const valLower = String(val).toLowerCase();
             if (
               val &&
-              (val === "Rất quan tâm" ||
-                val === "Quan tâm" ||
-                val.toLowerCase().includes("có"))
+              (valLower.includes("quan tâm") || valLower.includes("có"))
             ) {
               const activityMatch = colName.match(/\[(.*?)\]/);
               if (activityMatch) {
@@ -1525,7 +1547,21 @@
             const feeling = row[feelingCol] || null;
             const suggestion = row[suggestionCol] || null;
 
-            if (feeling || (suggestion && suggestion.trim().length > 5)) {
+            // Lọc ra các câu trả lời "không", "ko"...
+            const hasMeaningfulSuggestion =
+              suggestion &&
+              suggestion.trim().length > 3 &&
+              !suggestion.trim().toLowerCase().startsWith("không") &&
+              !suggestion.trim().toLowerCase().startsWith("kh a") &&
+              !suggestion.trim().toLowerCase().startsWith("ko");
+
+            const hasMeaningfulFeeling =
+              feeling &&
+              feeling.trim().length > 3 &&
+              !feeling.trim().toLowerCase().startsWith("không") &&
+              !feeling.trim().toLowerCase().startsWith("ko");
+
+            if (hasMeaningfulFeeling || hasMeaningfulSuggestion) {
               return `
                         <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
                             <div class="flex items-start gap-3 mb-3">
@@ -1569,7 +1605,6 @@
         }
 
         const counts = {};
-        // Khởi tạo counts từ mapping để đảm bảo thứ tự
         const orderedLabels = Object.values(mapping);
         orderedLabels.forEach((label) => {
           counts[label] = 0;
@@ -1577,14 +1612,22 @@
 
         data.forEach((row) => {
           const val = String(row[colName]).trim();
-          const label = mapping[val]; // Lấy nhãn đã map
+          // Thử tìm key dạng số (1, 2, 3...)
+          let label = mapping[val];
+
+          // Nếu không thấy, thử tìm key dạng chữ (Rất quan tâm, ...)
+          if (!label) {
+            const foundLabel = Object.values(mapping).find(
+              (l) => l.toLowerCase() === val.toLowerCase()
+            );
+            if (foundLabel) label = foundLabel;
+          }
 
           if (label) {
             counts[label] = (counts[label] || 0) + 1;
           }
         });
 
-        // Lọc ra các nhãn có giá trị > 0
         const finalLabels = [];
         const finalValues = [];
         for (const label of orderedLabels) {
