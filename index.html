@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Khảo Sát - Làng Hoa Sa Đéc</title>
+    <title>Dashboard Khảo Sát - Làng Hoa Sa Đéc | IUH Tourism Research</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
         font-family: "Inter", sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -26,20 +29,20 @@
         bottom: 0;
         background: radial-gradient(
             circle at 20% 50%,
-            rgba(102, 126, 234, 0.3) 0%,
+            rgba(102, 126, 234, 0.4) 0%,
             transparent 50%
           ),
           radial-gradient(
             circle at 80% 80%,
-            rgba(118, 75, 162, 0.3) 0%,
+            rgba(118, 75, 162, 0.4) 0%,
             transparent 50%
           ),
           radial-gradient(
             circle at 40% 20%,
-            rgba(240, 147, 251, 0.2) 0%,
+            rgba(240, 147, 251, 0.3) 0%,
             transparent 40%
           );
-        animation: gradientShift 15s ease infinite;
+        animation: gradientShift 20s ease infinite;
         pointer-events: none;
         z-index: 0;
       }
@@ -150,46 +153,10 @@
         width: 300px;
         height: 300px;
       }
-      .nav-btn:nth-child(1).active {
+      .nav-btn.active {
         background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
         box-shadow: 0 8px 24px rgba(102, 126, 234, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(2).active {
-        background: linear-gradient(135deg, #f093fb, #f5576c);
-        color: white;
-        box-shadow: 0 8px 24px rgba(240, 147, 251, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(3).active {
-        background: linear-gradient(135deg, #4facfe, #00f2fe);
-        color: black;
-        box-shadow: 0 8px 24px rgba(79, 172, 254, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(4).active {
-        background: linear-gradient(135deg, #43e97b, #38f9d7);
-        color: black;
-        box-shadow: 0 8px 24px rgba(67, 233, 123, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(5).active {
-        background: linear-gradient(135deg, #fa709a, #fee140);
-        color: black;
-        box-shadow: 0 8px 24px rgba(250, 112, 154, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(6).active {
-        background: linear-gradient(135deg, #30cfd0, #330867);
-        color: white;
-        box-shadow: 0 8px 24px rgba(48, 207, 208, 0.5);
-        transform: scale(1.05);
-      }
-      .nav-btn:nth-child(7).active {
-        background: linear-gradient(135deg, #f6d365, #fda085);
-        color: black;
-        box-shadow: 0 8px 24px rgba(246, 211, 101, 0.5);
         transform: scale(1.05);
       }
       .nav-btn:not(.active) {
@@ -273,6 +240,111 @@
         position: relative;
         z-index: 1;
       }
+      .logo-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .logo-container {
+        width: 80px;
+        height: 80px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .logo-container:hover {
+        transform: scale(1.1) rotate(5deg);
+      }
+      .logo-container svg {
+        width: 50px;
+        height: 50px;
+      }
+      .project-badge {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        display: inline-block;
+        margin-top: 10px;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+      .info-box {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: white;
+        padding: 20px;
+        border-radius: 16px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(240, 147, 251, 0.3);
+      }
+      .info-box h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .info-box p {
+        font-size: 14px;
+        line-height: 1.6;
+        opacity: 0.95;
+      }
+      .export-btn {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+        color: black;
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: none;
+        box-shadow: 0 4px 12px rgba(67, 233, 123, 0.4);
+      }
+      .export-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(67, 233, 123, 0.6);
+      }
+      .metric-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid #667eea;
+      }
+      .metric-label {
+        font-size: 13px;
+        color: #6b7280;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+      .metric-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: #1f2937;
+      }
+      .highlight-box {
+        background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+        padding: 16px;
+        border-radius: 12px;
+        margin: 10px 0;
+        box-shadow: 0 4px 12px rgba(253, 203, 110, 0.3);
+      }
+      .highlight-box p {
+        color: #2d3436;
+        font-weight: 600;
+        margin: 0;
+      }
     </style>
   </head>
   <body class="min-h-screen p-4 md:p-8">
@@ -281,41 +353,103 @@
         class="glassmorphism rounded-2xl p-8 mb-8 shadow-2xl animate-fadeInUp"
       >
         <div class="text-center">
-          <div class="inline-flex items-center gap-3 mb-3">
-            <div
-              class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center"
-            >
-              <svg
-                class="w-8 h-8 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                ></path>
+          <div class="logo-section">
+            <div class="logo-container">
+              <svg viewBox="0 0 100 100" fill="none">
+                <rect
+                  x="10"
+                  y="10"
+                  width="80"
+                  height="80"
+                  rx="10"
+                  fill="#667eea"
+                />
+                <text
+                  x="50"
+                  y="65"
+                  font-size="40"
+                  font-weight="bold"
+                  fill="white"
+                  text-anchor="middle"
+                >
+                  IUH
+                </text>
               </svg>
             </div>
-            <h1
-              class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
-            >
-              Dashboard Phân Tích Khảo Sát
-            </h1>
+
+            <div class="logo-container">
+              <svg viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="40" fill="#f093fb" />
+                <path d="M50 30 L40 50 L50 45 L60 50 Z" fill="white" />
+                <circle cx="50" cy="55" r="8" fill="white" />
+                <rect x="47" y="60" width="6" height="20" fill="#38f9d7" />
+              </svg>
+            </div>
           </div>
-          <p class="text-gray-700 font-semibold text-lg mb-2">
+
+          <h1
+            class="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3"
+          >
+            Dashboard Phân Tích Khảo Sát
+          </h1>
+          <p class="text-gray-800 font-semibold text-xl mb-2">
             Phát triển sản phẩm du lịch nông nghiệp trải nghiệm
           </p>
-          <p class="text-gray-600">Làng hoa Sa Đéc, tỉnh Đồng Tháp</p>
-          <p class="text-sm text-gray-500 mt-2">
-            Khóa luận tốt nghiệp - Trường ĐH Công Nghiệp TP.HCM
+          <p class="text-gray-700 font-medium text-lg mb-3">
+            🌸 Làng hoa Sa Đéc, tỉnh Đồng Tháp 🌸
           </p>
+
+          <div class="project-badge">
+            Khóa luận tốt nghiệp - Khoa Thương mại - Du lịch
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            Trường Đại học Công Nghiệp TP.HCM | Khóa 18 - Quản trị dịch vụ du
+            lịch và lữ hành
+          </p>
+
+          <div class="mt-6">
+            <button class="export-btn" onclick="exportSummary()">
+              <svg
+                width="20"
+                height="20"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                />
+                <path
+                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"
+                />
+              </svg>
+              Xuất Báo Cáo Tóm Tắt
+            </button>
+          </div>
         </div>
       </header>
 
-      <div class="glassmorphism rounded-2xl p-6 mb-8 shadow-xl">
+      <div class="info-box animate-fadeInUp" style="animation-delay: 0.1s">
+        <h3>
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+            />
+          </svg>
+          Về Khảo Sát Này
+        </h3>
+        <p>
+          Khảo sát này nhằm thu thập ý kiến của du khách về mức độ hài lòng và
+          nhu cầu phát triển các sản phẩm du lịch nông nghiệp trải nghiệm tại
+          Làng hoa Sa Đéc. Những ý kiến đóng góp quý báu từ du khách là cơ sở
+          quan trọng để đề xuất các giải pháp phát triển sản phẩm du lịch mới,
+          hấp dẫn và bền vững hơn.
+        </p>
+      </div>
+
+      <div
+        class="glassmorphism rounded-2xl p-6 mb-8 shadow-xl animate-fadeInUp"
+        style="animation-delay: 0.2s"
+      >
         <div class="flex flex-wrap justify-center gap-3">
           <button
             class="nav-btn active"
@@ -336,10 +470,10 @@
             🌱 Trải nghiệm nông nghiệp
           </button>
           <button class="nav-btn" onclick="showSection('future', this)">
-            🚀 Dự định
+            🚀 Dự định tương lai
           </button>
           <button class="nav-btn" onclick="showSection('feedback', this)">
-            🗣️ Cảm nhận & Đề xuất
+            💬 Phản hồi & Đề xuất
           </button>
         </div>
       </div>
@@ -350,7 +484,6 @@
             <p class="text-white/80 text-sm font-medium mb-1">Tổng phản hồi</p>
             <p id="totalResponses" class="text-5xl font-bold">0</p>
           </div>
-
           <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
             <p class="text-gray-600 text-sm font-medium mb-1">
               Nhóm tuổi phổ biến
@@ -370,6 +503,26 @@
               Sẵn sàng quay lại
             </p>
             <p id="returnRate" class="text-5xl font-bold text-blue-600">0%</p>
+          </div>
+        </div>
+
+        <div class="glassmorphism rounded-2xl p-6 shadow-xl mb-6">
+          <h3 class="section-title text-xl font-bold mb-6">
+            📈 Những Phát Hiện Chính
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="metric-card">
+              <div class="metric-label">Quan tâm trải nghiệm nông nghiệp</div>
+              <div class="metric-value" id="expInterestPercent">0%</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Sẵn sàng giới thiệu bạn bè</div>
+              <div class="metric-value" id="referralPercent">0%</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Mức giá chấp nhận (trung bình)</div>
+              <div class="metric-value" id="avgPrice">N/A</div>
+            </div>
           </div>
         </div>
 
@@ -474,6 +627,9 @@
       </div>
 
       <div id="satisfaction-section" class="section-content">
+        <div class="highlight-box mb-6">
+          <p>📊 Đánh giá mức độ hài lòng về 11 yếu tố tại Làng hoa Sa Đéc</p>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="text-lg font-bold mb-4">Sự phong phú loại hoa</h3>
@@ -525,6 +681,11 @@
       </div>
 
       <div id="experience-section" class="section-content">
+        <div class="highlight-box mb-6">
+          <p>
+            🌱 Nhu cầu và kỳ vọng về phát triển du lịch nông nghiệp trải nghiệm
+          </p>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
@@ -553,8 +714,8 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+        <div class="grid grid-cols-1 gap-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl mb-6">
             <h3 class="section-title text-xl font-bold mb-6">
               Yếu tố thu hút tham gia
             </h3>
@@ -574,7 +735,10 @@
       </div>
 
       <div id="future-section" class="section-content">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="highlight-box mb-6">
+          <p>🚀 Dự định và cam kết của du khách với Làng hoa Sa Đéc</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
               Giới thiệu bạn bè?
@@ -593,6 +757,9 @@
       </div>
 
       <div id="feedback-section" class="section-content">
+        <div class="highlight-box mb-6">
+          <p>💬 Cảm nhận thực tế và đề xuất phát triển từ du khách</p>
+        </div>
         <div class="grid grid-cols-1 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
@@ -606,8 +773,17 @@
         </div>
       </div>
 
-      <footer class="mt-8 text-center text-white/80 text-sm">
-        <p>© 2025 Khóa luận tốt nghiệp - Trường ĐH Công Nghiệp TP.HCM</p>
+      <footer class="mt-8 glassmorphism rounded-2xl p-6 text-center shadow-xl">
+        <p class="text-gray-700 font-semibold mb-2">
+          © 2025 Khóa luận tốt nghiệp - Khoa Thương mại - Du lịch
+        </p>
+        <p class="text-gray-600 text-sm mb-2">
+          Trường Đại học Công Nghiệp Thành phố Hồ Chí Minh
+        </p>
+        <p class="text-gray-500 text-xs">
+          Dashboard phát triển bởi nhóm sinh viên Khóa 18 - Quản trị dịch vụ du
+          lịch và lữ hành
+        </p>
       </footer>
     </div>
 
@@ -653,14 +829,15 @@
           const rawData = await response.json();
           console.log("Dữ liệu thô:", rawData);
 
-          // Kiểm tra định dạng
           if (Array.isArray(rawData)) {
-            // Định dạng: [mapping, row1, row2, ...]
             console.log("✓ Định dạng: Array");
             console.log("Số dòng:", rawData.length);
 
-            if (rawData.length === 0) {
-              throw new Error("File data.json là array rỗng!");
+            if (rawData.length < 2) {
+              // Cần ít nhất 2 dòng (header + data)
+              throw new Error(
+                "File data.json không có dữ liệu (chỉ có header)!"
+              );
             }
 
             columnMapping = rawData[0];
@@ -683,25 +860,13 @@
                 )
               );
           } else if (typeof rawData === "object" && rawData !== null) {
-            // Định dạng: {A: "...", B: "...", ...} - chỉ có mapping
             console.log("⚠️ Định dạng: Object (chỉ có mapping, không có data)");
             columnMapping = rawData;
             globalData = [];
 
             alert(
-              "⚠️ CẢNH BÁO: File data.json chỉ chứa column mapping!\n\n" +
-                "Định dạng hiện tại:\n" +
-                '{"A": "...", "B": "...", ...}\n\n' +
-                "Định dạng đúng phải là:\n" +
-                "[\n" +
-                '  {"A": "Dấu thời gian", "B": "1. Giới tính:", ...},\n' +
-                '  {"A": "2024-01-01", "B": "Nam", ...},\n' +
-                '  {"A": "2024-01-02", "B": "Nữ", ...}\n' +
-                "]\n\n" +
-                "Dashboard sẽ hiển thị demo data để bạn xem giao diện."
+              "⚠️ CẢNH BÁO: File data.json chỉ chứa column mapping!\n\nHiển thị demo data để bạn xem giao diện."
             );
-
-            // Tạo demo data để hiển thị giao diện
             globalData = generateDemoData();
           } else {
             throw new Error("Định dạng data.json không hợp lệ!");
@@ -711,16 +876,7 @@
           console.log("Số bản ghi hợp lệ:", globalData.length);
 
           if (globalData.length === 0) {
-            alert(
-              "⚠️ Không có dữ liệu!\n\n" +
-                "File data.json cần có định dạng:\n" +
-                "[\n" +
-                '  {"A": "Dấu thời gian", "B": "1. Giới tính:", ...},  // Row 0: Column mapping\n' +
-                '  {"A": "2024-01-01 10:00", "B": "Nam", "C": "18-25", ...},  // Row 1: Data\n' +
-                '  {"A": "2024-01-01 11:00", "B": "Nữ", "C": "26-35", ...}   // Row 2: Data\n' +
-                "]\n\n" +
-                "Hiển thị demo data..."
-            );
+            alert("⚠️ Không có dữ liệu!\n\nHiển thị demo data...");
             globalData = generateDemoData();
           }
 
@@ -729,22 +885,15 @@
         } catch (error) {
           console.error("❌ Lỗi chi tiết:", error);
           alert(
-            `Không thể tải dữ liệu!\n\nLỗi: ${error.message}\n\n` +
-              `Vui lòng:\n` +
-              `1. Kiểm tra file data.json có cùng thư mục với file HTML\n` +
-              `2. Đảm bảo định dạng là Array: [mapping, data1, data2, ...]\n` +
-              `3. Mở Console (F12) để xem chi tiết\n\n` +
-              `Hiển thị demo data...`
+            `Không thể tải dữ liệu!\n\nLỗi: ${error.message}\n\nHiển thị demo data...`
           );
 
-          // Load demo data khi có lỗi
           columnMapping = {
             A: "Dấu thời gian",
             B: "1. Giới tính:",
             C: "2. Độ tuổi:",
             D: "3. Nơi ở hiện tại:",
             E: "4. Nghề nghiệp của Anh/Chị:",
-            // Thêm các key khác nếu demo data cần
             F: "5. Anh/Chị đã đến Làng hoa Sa Đéc bao nhiêu lần?",
             G: "6. Anh/Chị biết đến Làng hoa Sa Đéc thông qua kênh thông tin nào? (Có thể chọn nhiều đáp án)",
             H: "7. Anh/Chị đi du lịch với ai?",
@@ -764,18 +913,18 @@
             V: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự đa dạng của các hoạt động trải nghiệm]",
             W: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Tính kết nối giữa các điểm tham quan trong khu vực Sa Đéc (liên kết tour, tuyến, cơ sở lưu trú, ẩm thực)]",
             X: '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?',
-            Y: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]",
-            Z: '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]',
-            AA: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]",
-            AB: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]",
-            AC: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]",
-            AD: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]",
-            AE: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]",
+            Y: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]",
+            Z: '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]',
+            AA: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]",
+            AB: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]",
+            AC: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]",
+            AD: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]",
+            AE: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]",
             AF: "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?",
             AG: "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)",
             AH: "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ",
             AI: "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ",
-            AJ: "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”",
+            AJ: 'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"', // Giữ nguyên key lỗi của demo
             AK: "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?",
             AL: "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?",
           };
@@ -785,7 +934,6 @@
       }
 
       function generateDemoData() {
-        // Tạo 50 mẫu dữ liệu demo
         const genders = ["Nam", "Nữ"];
         const ages = ["18-25", "26-35", "36-45", "46-55", "Trên 55"];
         const locations = [
@@ -845,7 +993,7 @@
         const yesNo = ["Có", "Không"];
 
         const demoData = [];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 100; i++) {
           demoData.push({
             "Dấu thời gian": `2024-11-${String((i % 30) + 1).padStart(
               2,
@@ -899,19 +1047,19 @@
               satisfactions[Math.floor(Math.random() * satisfactions.length)],
             '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?':
               interests[Math.floor(Math.random() * 2)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]":
               interests[Math.floor(Math.random() * interests.length)],
-            '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]':
+            '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]':
               interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]":
               interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]":
               interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]":
               interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]":
               interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]":
+            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]":
               interests[Math.floor(Math.random() * interests.length)],
             "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?":
               prices[Math.floor(Math.random() * prices.length)],
@@ -921,23 +1069,20 @@
               "Cải thiện cơ sở vật chất, Tăng cường quảng bá",
             "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ":
               yesNo[Math.floor(Math.random() * yesNo.length)],
-            // *** ĐÂY LÀ CHỖ FIX ***
-            "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”":
+            'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"':
               yesNo[Math.floor(Math.random() * yesNo.length)],
             "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?":
-              "Rất thích! Hoa đẹp, không khí trong lành.",
+              "Rất thích! Hoa đẹp, không khí trong lành, người dân thân thiện.",
             "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?":
-              "Nên có thêm các hoạt động tương tác.",
+              "Nên có thêm các hoạt động tương tác, cải thiện cơ sở vật chất và tăng cường quảng bá.",
           });
         }
-
-        console.log("✓ Đã tạo 50 mẫu demo data");
+        console.log("✓ Đã tạo 100 mẫu demo data");
         return demoData;
       }
 
       function processAllData() {
         const d = globalData;
-
         document.getElementById("totalResponses").textContent = d.length;
 
         if (d.length === 0) {
@@ -950,13 +1095,11 @@
         const ageCounts = {};
         d.forEach((row) => {
           const ageGroup = row["2. Độ tuổi:"];
-          if (ageGroup) {
-            ageCounts[ageGroup] = (ageCounts[ageGroup] || 0) + 1;
-          }
+          if (ageGroup) ageCounts[ageGroup] = (ageCounts[ageGroup] || 0) + 1;
         });
 
-        let popularAgeGroup = "N/A";
-        let maxCount = 0;
+        let popularAgeGroup = "N/A",
+          maxCount = 0;
         for (const ageGroup in ageCounts) {
           if (ageCounts[ageGroup] > maxCount) {
             maxCount = ageCounts[ageGroup];
@@ -986,22 +1129,104 @@
           satCount > 0 ? ((satisfiedTotal / satCount) * 100).toFixed(1) : "0";
         document.getElementById("satisfactionRate").textContent = satRate + "%";
 
+        // ==================================================
+        // START FIX 2: Sửa logic thẻ "Sẵn sàng quay lại" (Cột AJ)
+        // ==================================================
         // Return rate
-        // *** ĐÂY LÀ CHỖ FIX ***
         const returnKey =
-          "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"; // Phải dùng smart quote "”"
+          'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"'; // Key từ JSON header (có dấu ”" ở cuối)
+
+        // KIỂM TRA NẾU KEY TRÊN KHÔNG ĐÚNG (do file data.json mới)
+        let actualReturnKey = returnKey;
+        if (!globalData[0].hasOwnProperty(returnKey)) {
+          // Thử key đã sửa (bỏ bớt 1 dấu ")
+          const fixedKey =
+            "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”";
+          if (globalData[0].hasOwnProperty(fixedKey)) {
+            actualReturnKey = fixedKey;
+            console.log("Đã tự động sửa key 'Quay lại' (AJ).");
+          } else {
+            console.error("Không tìm thấy key cho cột AJ (Quay lại)!");
+          }
+        }
+
         const returnYes = d.filter((row) => {
-          const val = row[returnKey];
-          return (
-            val &&
-            (val.toLowerCase().includes("có") ||
-              val.toLowerCase().includes("chắc chắn"))
-          );
+          const val = row[actualReturnKey];
+          if (!val) return false;
+          const valLower = String(val).toLowerCase();
+          // Chỉ chấp nhận "có" hoặc "chắc chắn"
+          return valLower.includes("có") || valLower.includes("chắc chắn");
         }).length;
         const returnRate = ((returnYes / d.length) * 100).toFixed(1);
         document.getElementById("returnRate").textContent = returnRate + "%";
+        // ==================================================
+        // END FIX 2
+        // ==================================================
 
-        // Top occupations and locations
+        // Experience interest
+        const expKey =
+          '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?';
+        const expYes = d.filter((row) => {
+          const val = row[expKey];
+          if (!val) return false;
+          const valLower = String(val).toLowerCase();
+          // Chấp nhận "quan tâm", "rất", "4", "5"
+          return (
+            valLower.includes("quan tâm") ||
+            valLower.includes("rất") ||
+            valLower === "4" ||
+            valLower === "5"
+          );
+        }).length;
+        const expRate = ((expYes / d.length) * 100).toFixed(1);
+        document.getElementById("expInterestPercent").textContent =
+          expRate + "%";
+
+        // Referral rate
+        const refKey =
+          "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ";
+        const refYes = d.filter((row) => {
+          const val = row[refKey];
+          if (!val) return false;
+          const valLower = String(val).toLowerCase();
+          // Chấp nhận "có", "4", "5"
+          return (
+            valLower.includes("có") || valLower === "4" || valLower === "5"
+          );
+        }).length;
+        const refRate = ((refYes / d.length) * 100).toFixed(1);
+        document.getElementById("referralPercent").textContent = refRate + "%";
+
+        // ==================================================
+        // START FIX 3: Sửa logic "Mức giá" (Cột AF)
+        // ==================================================
+        // Average price
+        const priceKey =
+          "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?";
+        const priceRanges = {
+          "100.000 - 200.000 VNĐ": 150000,
+          "200.000 - 300.000 VNĐ": 250000,
+          "Trên 300.000 VNĐ": 350000, // Đã cập nhật
+          "Dưới 100.000 VNĐ": 80000, // Đã cập nhật
+        };
+        let totalPrice = 0,
+          priceCount = 0;
+        d.forEach((row) => {
+          const val = row[priceKey];
+          if (val && priceRanges[val]) {
+            totalPrice += priceRanges[val];
+            priceCount++;
+          }
+        });
+        const avgPrice =
+          priceCount > 0 ? Math.round(totalPrice / priceCount) : 0;
+        document.getElementById("avgPrice").textContent =
+          avgPrice > 0 ? (avgPrice / 1000).toFixed(0) + "K VNĐ" : "N/A";
+        // ==================================================
+        // END FIX 3
+        // ==================================================
+
+        // Top lists
         renderTopList(d, "4. Nghề nghiệp của Anh/Chị:", "topOccupations");
         renderTopList(d, "3. Nơi ở hiện tại:", "topLocations");
 
@@ -1041,7 +1266,20 @@
         renderOrderedChart(d, "W", "sat11Chart", satOrder);
 
         // Experience
-        renderPieChart(d, "X", "expInterestChart", "doughnut");
+        const interestMapping = {
+          5: "Rất quan tâm",
+          4: "Quan tâm",
+          3: "Bình thường",
+          2: "Không quan tâm",
+          1: "Rất không quan tâm",
+        };
+        renderMappedPieChart(
+          d,
+          "X",
+          "expInterestChart",
+          "doughnut",
+          interestMapping
+        );
         renderBarChart(d, "AF", "priceRangeChart");
 
         const expCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
@@ -1051,7 +1289,22 @@
         renderMultiChart(d, "AH", "improvementChart");
 
         // Future
-        renderPieChart(d, "AI", "referralChart", "doughnut");
+        const referralMapping = {
+          5: "Rất sẵn lòng",
+          4: "Sẵn lòng",
+          3: "Bình thường",
+          2: "Không sẵn lòng",
+          1: "Chắc chắn không",
+        };
+        renderMappedPieChart(
+          d,
+          "AI",
+          "referralChart",
+          "doughnut",
+          referralMapping
+        );
+
+        // Cột AJ (return) đã là "Có/Không", nên renderPieChart gốc là ĐÚNG
         renderPieChart(d, "AJ", "returnChart", "doughnut");
 
         // Feedback
@@ -1059,12 +1312,10 @@
       }
 
       function getColumnByLetter(letter) {
-        // Kiểm tra xem mapping đã được tải chưa
         if (Object.keys(columnMapping).length === 0) {
           console.error("Column mapping chưa được tải!");
-          return null; // Trả về null nếu mapping chưa sẵn sàng
+          return null;
         }
-        // Trả về tên cột đầy đủ từ mapping
         const colName = columnMapping[letter];
         if (!colName) {
           console.warn(`Không tìm thấy mapping cho chữ cái: ${letter}`);
@@ -1074,7 +1325,7 @@
       }
 
       function renderTopList(data, colName, elementId, top = 5) {
-        if (!colName) return; // Thêm kiểm tra
+        if (!colName) return;
         const counts = {};
         data.forEach((row) => {
           const val = row[colName];
@@ -1173,6 +1424,9 @@
         createChart(canvasId, "bar", labels, values, false);
       }
 
+      // ==================================================
+      // START FIX 1: Sửa lỗi tách câu
+      // ==================================================
       function renderMultiChart(data, colLetter, canvasId) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -1184,8 +1438,10 @@
         data.forEach((row) => {
           const val = row[colName];
           if (val) {
+            // Sửa lỗi: Tách bằng ", " (dấu phẩy + DẤU CÁCH)
+            // Đây là ký tự phân tách chuẩn của Google Forms cho nhiều lựa chọn
             val
-              .split(",")
+              .split(", ") // <--- ĐÂY LÀ DÒNG ĐÃ SỬA
               .map((v) => v.trim())
               .forEach((item) => {
                 if (item) counts[item] = (counts[item] || 0) + 1;
@@ -1203,6 +1459,9 @@
           true
         );
       }
+      // ==================================================
+      // END FIX 1
+      // ==================================================
 
       function renderMultiColChart(data, colLetters, canvasId) {
         const counts = {};
@@ -1268,27 +1527,27 @@
 
             if (feeling || (suggestion && suggestion.trim().length > 5)) {
               return `
-                <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
-                    <div class="flex items-start gap-3 mb-3">
-                        <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
-                        <div class="text-gray-700 text-sm leading-relaxed w-full">
-                            <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
-                            <p class="mt-1">${
-                              feeling || "<em>(Không có)</em>"
-                            }</p>
+                        <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
+                            <div class="flex items-start gap-3 mb-3">
+                                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
+                                <div class="text-gray-700 text-sm leading-relaxed w-full">
+                                    <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
+                                    <p class="mt-1">${
+                                      feeling || "<em>(Không có)</em>"
+                                    }</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
+                                <div class="text-gray-700 text-sm leading-relaxed w-full">
+                                    <strong class="text-gray-900">Đề xuất:</strong>
+                                    <p class="mt-1">${
+                                      suggestion || "<em>(Không có)</em>"
+                                    }</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
-                        <div class="text-gray-700 text-sm leading-relaxed w-full">
-                            <strong class="text-gray-900">Đề xuất:</strong>
-                            <p class="mt-1">${
-                              suggestion || "<em>(Không có)</em>"
-                            }</p>
-                        </div>
-                    </div>
-                </div>
-              `;
+                    `;
             }
             return "";
           })
@@ -1298,6 +1557,44 @@
           feedbackItems.length > 0
             ? feedbackItems
             : '<p class="text-gray-500 text-center py-8">Chưa có cảm nhận hoặc đề xuất nào.</p>';
+      }
+
+      function renderMappedPieChart(data, colLetter, canvasId, type, mapping) {
+        const colName = getColumnByLetter(colLetter);
+        if (!colName) {
+          console.error(
+            `(MappedPie) Không tìm thấy cột cho chữ cái: ${colLetter}`
+          );
+          return;
+        }
+
+        const counts = {};
+        // Khởi tạo counts từ mapping để đảm bảo thứ tự
+        const orderedLabels = Object.values(mapping);
+        orderedLabels.forEach((label) => {
+          counts[label] = 0;
+        });
+
+        data.forEach((row) => {
+          const val = String(row[colName]).trim();
+          const label = mapping[val]; // Lấy nhãn đã map
+
+          if (label) {
+            counts[label] = (counts[label] || 0) + 1;
+          }
+        });
+
+        // Lọc ra các nhãn có giá trị > 0
+        const finalLabels = [];
+        const finalValues = [];
+        for (const label of orderedLabels) {
+          if (counts[label] > 0) {
+            finalLabels.push(label);
+            finalValues.push(counts[label]);
+          }
+        }
+
+        createChart(canvasId, type, finalLabels, finalValues, true);
       }
 
       function createChart(
@@ -1379,10 +1676,7 @@
                   y: {
                     display: true,
                     beginAtZero: true,
-                    grid: {
-                      color: "rgba(0, 0, 0, 0.05)",
-                      drawBorder: false,
-                    },
+                    grid: { color: "rgba(0, 0, 0, 0.05)", drawBorder: false },
                     ticks: {
                       font: { size: 10 },
                       precision: 0,
@@ -1400,6 +1694,75 @@
         }
 
         charts[canvasId] = new Chart(ctx, config);
+      }
+
+      function exportSummary() {
+        const summary = `
+    BÁOCÁO TÓM TẮT KHẢO SÁT
+    Phát triển sản phẩm du lịch nông nghiệp trải nghiệm tại Làng hoa Sa Đéc, tỉnh Đồng Tháp
+
+    ═══════════════════════════════════════════════════════
+
+    📊 TỔNG QUAN
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • Tổng số phản hồi: ${document.getElementById("totalResponses").textContent}
+    • Nhóm tuổi phổ biến: ${
+      document.getElementById("popularAgeGroup").textContent
+    }
+    • Tỷ lệ hài lòng: ${document.getElementById("satisfactionRate").textContent}
+    • Sẵn sàng quay lại: ${document.getElementById("returnRate").textContent}
+
+    📈 NHỮNG PHÁT HIỆN CHÍNH
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    • Quan tâm trải nghiệm nông nghiệp: ${
+      document.getElementById("expInterestPercent").textContent
+    }
+    • Sẵn sàng giới thiệu bạn bè: ${
+      document.getElementById("referralPercent").textContent
+    }
+    • Mức giá chấp nhận (trung bình): ${
+      document.getElementById("avgPrice").textContent
+    }
+
+    ═══════════════════════════════════════════════════════
+
+    🎯 KẾT LUẬN VÀ KHUYẾN NGHỊ
+
+    Dựa trên kết quả khảo sát, có thể thấy:
+
+    1. MỨC ĐỘ QUAN TÂM: Du khách có mức độ quan tâm cao đến các hoạt động
+       trải nghiệm nông nghiệp tại Làng hoa Sa Đéc.
+
+    2. TIỀM NĂNG PHÁT TRIỂN: Với tỷ lệ hài lòng và dự định quay lại cao,
+       đây là cơ hội tốt để phát triển các sản phẩm du lịch trải nghiệm.
+
+    3. MỨC GIÁ HỢP LÝ: Du khách sẵn sàng chi trả với mức giá trung bình
+       phù hợp cho các gói trải nghiệm 2-3 tiếng.
+
+    4. ĐỀ XUẤT PHÁT TRIỂN:
+       - Đa dạng hóa các hoạt động trải nghiệm
+       - Cải thiện cơ sở hạ tầng và dịch vụ
+       - Tăng cường đào tạo nhân viên và nông dân địa phương
+       - Quảng bá rộng rãi trên các kênh truyền thông
+
+    ═══════════════════════════════════════════════════════
+
+    Báo cáo được tạo tự động từ Dashboard Phân Tích Khảo Sát
+    Trường Đại học Công Nghiệp TP.HCM - Khoa Thương mại - Du lịch
+    Ngày xuất: ${new Date().toLocaleDateString("vi-VN")}
+        `;
+
+        const blob = new Blob([summary], { type: "text/plain;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Bao_Cao_Tom_Tat_Khao_Sat_Lang_Hoa_Sa_Dec.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        alert("✅ Đã xuất báo cáo tóm tắt thành công!");
       }
     </script>
   </body>
