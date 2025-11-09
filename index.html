@@ -864,6 +864,7 @@
           </div>
         </div>
       </div>
+
       <div id="experience-section" class="section-content">
         <div class="highlight-box mb-6">
           <p>
@@ -900,15 +901,6 @@
 
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Hoạt động muốn P.Triển (Lượt chọn, Câu 14)
-            </h3>
-            <div class="chart-wrapper" style="height: 300px">
-              <canvas id="expActivitiesChart"></canvas>
-            </div>
-          </div>
-
-          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="section-title text-xl font-bold mb-6">
               Yếu tố thu hút tham gia (Câu 16)
             </h3>
             <div class="chart-wrapper-large" style="height: 400px">
@@ -916,7 +908,7 @@
             </div>
           </div>
 
-          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2">
             <h3 class="section-title text-xl font-bold mb-6">
               Yếu tố cần cải thiện (Câu 17)
             </h3>
@@ -924,8 +916,177 @@
               <canvas id="improvementChart"></canvas>
             </div>
           </div>
+
+          <div
+            class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2 mt-6"
+          >
+            <h3 class="section-title text-xl font-bold mb-6">
+              Chi tiết Mức độ Quan tâm (Câu 14)
+            </h3>
+            <div
+              class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mt-12"
+            >
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">Tour xe đạp/xe điện</h3>
+                  <div>
+                    <span
+                      id="int1Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int1StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int1Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">"Một ngày làm nông dân"</h3>
+                  <div>
+                    <span
+                      id="int2Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int2StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int2Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">Workshop cắm hoa/bonsai</h3>
+                  <div>
+                    <span
+                      id="int3Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int3StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int3Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">Lớp học nấu ăn/làm bánh</h3>
+                  <div>
+                    <span
+                      id="int4Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int4StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int4Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">
+                    Workshop thủ công (nến, trà)
+                  </h3>
+                  <div>
+                    <span
+                      id="int5Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int5StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int5Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">Hoạt động sông nước</h3>
+                  <div>
+                    <span
+                      id="int6Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int6StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int6Chart"></canvas>
+                </div>
+              </div>
+              <div class="glassmorphism rounded-2xl p-4 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-md font-bold">Lưu trú Homestay</h3>
+                  <div>
+                    <span
+                      id="int7Mean"
+                      class="text-xl font-bold text-purple-600"
+                      title="Điểm trung bình"
+                      >0.00</span
+                    >
+                    <span
+                      id="int7StdDev"
+                      class="text-md font-medium text-gray-500"
+                      title="Độ lệch chuẩn"
+                      >(s=0.00)</span
+                    >
+                  </div>
+                </div>
+                <div class="chart-wrapper" style="height: 250px">
+                  <canvas id="int7Chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
       <div id="future-section" class="section-content">
         <div class="highlight-box mb-6">
           <p>🚀 Dự định và cam kết của du khách với Làng hoa Sa Đéc</p>
@@ -980,6 +1141,9 @@
     </div>
 
     <script>
+      // ===================================================================
+      // PHẦN 1: NẠP VÀ XỬ LÝ DỮ LIỆU
+      // ===================================================================
       const charts = {};
       const colors = [
         "#667eea",
@@ -996,9 +1160,6 @@
       let globalData = [];
       let columnMapping = {};
 
-      // ============================================================
-      // START FIX: THÊM BẢN ĐỒ ĐIỂM (SCORE MAP)
-      // ============================================================
       const scoreMap = {
         // Thang điểm Hài lòng (Câu 12)
         "rất không hài lòng": 1,
@@ -1021,28 +1182,13 @@
         4: 4,
         5: 5,
       };
-      // ============================================================
-      // END FIX
-      // ============================================================
-
-      function showSection(section, element) {
-        document
-          .querySelectorAll(".section-content")
-          .forEach((el) => el.classList.remove("active"));
-        document
-          .querySelectorAll(".nav-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-        document.getElementById(`${section}-section`).classList.add("active");
-        element.classList.add("active");
-      }
 
       document.addEventListener("DOMContentLoaded", loadData);
 
       async function loadData() {
         try {
           console.log("Đang tải dữ liệu từ data.json...");
-          // !!! QUAN TRỌNG: Hãy đảm bảo file "data.json" nằm CÙNG THƯ MỤC với file HTML này
-          const response = await fetch("data.json");
+          const response = await fetch("data.json"); // Đọc file data.json
 
           if (!response.ok) {
             throw new Error(
@@ -1082,15 +1228,6 @@
                   (v) => v !== "" && v !== null && v !== undefined
                 )
               );
-          } else if (typeof rawData === "object" && rawData !== null) {
-            console.log("⚠️ Định dạng: Object (chỉ có mapping, không có data)");
-            columnMapping = rawData;
-            globalData = [];
-
-            alert(
-              "⚠️ CẢNH BÁO: File data.json chỉ chứa column mapping!\n\nHiển thị demo data để bạn xem giao diện."
-            );
-            globalData = generateDemoData();
           } else {
             throw new Error("Định dạng data.json không hợp lệ!");
           }
@@ -1099,8 +1236,7 @@
           console.log("Số bản ghi hợp lệ:", globalData.length);
 
           if (globalData.length === 0) {
-            alert("⚠️ Không có dữ liệu!\n\nHiển thị demo data...");
-            globalData = generateDemoData();
+            alert("⚠️ Không có dữ liệu! Vui lòng kiểm tra lại file data.json");
           }
 
           processAllData();
@@ -1108,260 +1244,49 @@
         } catch (error) {
           console.error("❌ Lỗi chi tiết:", error);
           alert(
-            `Không thể tải dữ liệu!\n\nLỗi: ${error.message}\n\nHiển thị demo data...`
+            `Không thể tải dữ liệu!\n\nLỗi: ${error.message}\n\nHãy đảm bảo file 'data.json' nằm cùng thư mục với file HTML này.`
           );
-
-          columnMapping = {
-            A: "Dấu thời gian",
-            B: "1. Giới tính:",
-            C: "2. Độ tuổi:",
-            D: "3. Nơi ở hiện tại:",
-            E: "4. Nghề nghiệp của Anh/Chị:",
-            F: "5. Anh/Chị đã đến Làng hoa Sa Đéc bao nhiêu lần?",
-            G: "6. Anh/Chị biết đến Làng hoa Sa Đéc thông qua kênh thông tin nào? (Có thể chọn nhiều đáp án)",
-            H: "7. Anh/Chị đi du lịch với ai?",
-            I: "8. Mục đích của Anh/Chị khi đến Làng hoa Sa Đéc là gì? (Có thể chọn nhiều đáp án)",
-            J: "9. Anh/Chị đi du lịch theo hình thức nào? ",
-            K: "10. Thời gian lưu trú của Anh/Chị tại Sa Đéc là bao lâu? ",
-            L: "11. Anh/Chị đã tham gia những hoạt động nào tại Sa Đéc? (Có thể chọn nhiều đáp án)",
-            M: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự phong phú của các loại hoa]",
-            N: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự hiếu khách của người dân địa phương]",
-            O: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cảnh quan, vệ sinh môi trường]",
-            P: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Thái độ phục vụ của nhân viên]",
-            Q: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cơ sở hạ tầng]",
-            R: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Nét riêng biệt/độc đáo của điểm đến]",
-            S: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Chất lượng dịch vụ]",
-            T: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Giá cả dịch vụ]",
-            U: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự an toàn trong quá trình trải nghiệm]",
-            V: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự đa dạng của các hoạt động trải nghiệm]",
-            W: "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Tính kết nối giữa các điểm tham quan trong khu vực Sa Đéc (liên kết tour, tuyến, cơ sở lưu trú, ẩm thực)]",
-            X: '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?',
-            Y: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]",
-            Z: '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]',
-            AA: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]",
-            AB: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]",
-            AC: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]",
-            AD: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]",
-            AE: "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]",
-            AF: "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?",
-            AG: "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)",
-            AH: "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ",
-            AI: "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ",
-            AJ: 'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"',
-            AK: "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?",
-            AL: "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?",
-          };
-          globalData = generateDemoData();
-          processAllData();
         }
       }
 
-      function generateDemoData() {
-        // ... (Hàm này không thay đổi, giữ nguyên) ...
-        const genders = ["Nam", "Nữ"];
-        const ages = ["18-25", "26-35", "36-45", "46-55", "Trên 55"];
-        const locations = [
-          "TP.HCM",
-          "Hà Nội",
-          "Đồng Tháp",
-          "Cần Thơ",
-          "An Giang",
-          "Vĩnh Long",
-        ];
-        const occupations = [
-          "Sinh viên",
-          "Nhân viên văn phòng",
-          "Kinh doanh",
-          "Giáo viên",
-          "Tự do",
-          "Hưu trí",
-        ];
-        const visits = ["Lần đầu", "2-3 lần", "4-5 lần", "Trên 5 lần"];
-        const companions = [
-          "Một mình",
-          "Gia đình",
-          "Bạn bè",
-          "Đồng nghiệp",
-          "Tour du lịch",
-        ];
-        const travelTypes = [
-          "Tự túc",
-          "Tour trọn gói",
-          "Tour trọn gói",
-          "Kết hợp",
-        ];
-        const durations = [
-          "Nửa ngày",
-          "1 ngày",
-          "2 ngày 1 đêm",
-          "3 ngày 2 đêm",
-        ];
-        const satisfactions = [
-          "Rất hài lòng",
-          "Hài lòng",
-          "Bình thường",
-          "Không hài lòng",
-        ];
-        const interests = [
-          "Rất quan tâm",
-          "Quan tâm",
-          "Bình thường",
-          "Không quan tâm",
-        ];
-        const prices = [
-          "100.000 - 200.000 VNĐ",
-          "200.000 - 300.000 VNĐ",
-          "300.000 - 500.000 VNĐ",
-          "Trên 500.000 VNĐ",
-        ];
-        const yesNo = ["Có", "Không"];
-
-        const demoData = [];
-        for (let i = 0; i < 100; i++) {
-          demoData.push({
-            "Dấu thời gian": `2024-11-${String((i % 30) + 1).padStart(
-              2,
-              "0"
-            )} ${String(Math.floor(Math.random() * 24)).padStart(
-              2,
-              "0"
-            )}:${String(Math.floor(Math.random() * 60)).padStart(2, "0")}`,
-            "1. Giới tính:":
-              genders[Math.floor(Math.random() * genders.length)],
-            "2. Độ tuổi:": ages[Math.floor(Math.random() * ages.length)],
-            "3. Nơi ở hiện tại:":
-              locations[Math.floor(Math.random() * locations.length)],
-            "4. Nghề nghiệp của Anh/Chị:":
-              occupations[Math.floor(Math.random() * occupations.length)],
-            "5. Anh/Chị đã đến Làng hoa Sa Đéc bao nhiêu lần?":
-              visits[Math.floor(Math.random() * visits.length)],
-            "6. Anh/Chị biết đến Làng hoa Sa Đéc thông qua kênh thông tin nào? (Có thể chọn nhiều đáp án)":
-              "Mạng xã hội, Bạn bè/người thân giới thiệu",
-            "7. Anh/Chị đi du lịch với ai?":
-              companions[Math.floor(Math.random() * companions.length)],
-            "8. Mục đích của Anh/Chị khi đến Làng hoa Sa Đéc là gì? (Có thể chọn nhiều đáp án)":
-              "Du lịch nghỉ dưỡng, Chụp ảnh",
-            "9. Anh/Chị đi du lịch theo hình thức nào? ":
-              travelTypes[Math.floor(Math.random() * travelTypes.length)],
-            "10. Thời gian lưu trú của Anh/Chị tại Sa Đéc là bao lâu? ":
-              durations[Math.floor(Math.random() * durations.length)],
-            "11. Anh/Chị đã tham gia những hoạt động nào tại Sa Đéc? (Có thể chọn nhiều đáp án)":
-              "Tham quan vườn hoa, Chụp ảnh, Mua hoa",
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự phong phú của các loại hoa]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự hiếu khách của người dân địa phương]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cảnh quan, vệ sinh môi trường]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Thái độ phục vụ của nhân viên]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Cơ sở hạ tầng]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Nét riêng biệt/độc đáo của điểm đến]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Chất lượng dịch vụ]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Giá cả dịch vụ]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự an toàn trong quá trình trải nghiệm]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Sự đa dạng của các hoạt động trải nghiệm]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            "12. Anh/Chị vui lòng đánh giá mức độ hài lòng về các yếu tố sau: [Tính kết nối giữa các điểm tham quan trong khu vực Sa Đéc (liên kết tour, tuyến, cơ sở lưu trú, ẩm thực)]":
-              satisfactions[Math.floor(Math.random() * satisfactions.length)],
-            '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?':
-              interests[Math.floor(Math.random() * 2)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Tour tham quan vườn hoa bằng xe đạp/xe điện có hướng dẫn viên địa phương]":
-              interests[Math.floor(Math.random() * interests.length)],
-            '14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Trải nghiệm "Một ngày làm nông dân" (trọn gói từ trồng, chăm sóc, thu hoạch)]':
-              interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Workshop cắm hoa/tạo hình bonsai mini (do nghệ nhân hướng dẫn)]":
-              interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học nấu ăn/làm bánh sử dụng nguyên liệu hoa (ví dụ: bánh kẹp hoa hồng, gỏi hoa...)]":
-              interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lớp học/Workshop làm sản phẩm thủ công từ hoa (làm nến thơm, trà hoa, xà phòng, tranh hoa)]":
-              interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Các hoạt động gắn liền văn hóa sông nước (tát mương, bắt cá tại vườn)]":
-              interests[Math.floor(Math.random() * interests.length)],
-            "14. Anh/Chị quan tâm đến việc phát triển thêm các hoạt động trải nghiệm nông nghiệp nào sau đây tại Làng hoa Sa Đéc?  [Lưu trú tại nhà dân (Homestay) trong làng hoa để trải nghiệm cuộc sống cùng nông dân]":
-              interests[Math.floor(Math.random() * interests.length)],
-            "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?":
-              prices[Math.floor(Math.random() * prices.length)],
-            "16. Theo Anh/Chị, những yếu tố nào là quan trọng nhất để thu hút khách tham gia du lịch trải nghiệm? (Có thể chọn nhiều phương án)":
-              "Tính độc đáo của hoạt động, Giá cả hợp lý",
-            "Câu 17: Theo Anh/Chị, những yếu tố cần cải thiện để các hoạt động trải nghiệm nông nghiệp hấp dẫn hơn? (Có thể chọn nhiều phương án) ":
-              "Cải thiện cơ sở vật chất, Tăng cường quảng bá",
-            "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ":
-              yesNo[Math.floor(Math.random() * yesNo.length)],
-            'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"':
-              yesNo[Math.floor(Math.random() * yesNo.length)],
-            "20. Anh/Chị cảm nhận như thế nào về chuyến đi Làng hoa Sa Đéc lần này?":
-              "Rất thích! Hoa đẹp, không khí trong lành, người dân thân thiện.",
-            "21. Anh/Chị có đề xuất gì để Làng hoa Sa Đéc phát triển các sản phẩm du lịch trải nghiệm hấp dẫn hơn không?":
-              "Nên có thêm các hoạt động tương tác, cải thiện cơ sở vật chất và tăng cường quảng bá.",
-          });
-        }
-        console.log("✓ Đã tạo 100 mẫu demo data");
-        return demoData;
-      }
-
-      // ============================================================
-      // START FIX 1: HÀM TÁCH CÂU TRẢ LỜI THÔNG MINH (THEO LOGIC CỦA BẠN)
-      // ============================================================
       function smartSplitAnswers(text) {
         if (!text) return [];
-
-        // 1. Tách bằng dấu phẩy như cũ
         const parts = text.split(",");
         const results = [];
         let currentAnswer = "";
 
         for (let i = 0; i < parts.length; i++) {
           const part = parts[i].trim();
-          if (!part) continue; // Bỏ qua nếu có,,
-
+          if (!part) continue;
           if (currentAnswer === "") {
-            // Đây là phần tử đầu tiên, luôn là bắt đầu của một câu trả lời
             currentAnswer = part;
           } else {
-            // 2. Kiểm tra ký tự đầu tiên
             const firstChar = part.charAt(0);
             const isUpperCase =
               firstChar === firstChar.toUpperCase() &&
               firstChar !== firstChar.toLowerCase();
-
-            // 3. Nếu là CHỮ HOA và độ dài > 3
             if (isUpperCase && part.length > 3) {
-              // 4. Đây là câu trả lời mới
-              results.push(currentAnswer); // Đẩy câu trả lời cũ vào
-              currentAnswer = part; // Bắt đầu câu mới
+              results.push(currentAnswer);
+              currentAnswer = part;
             } else {
-              // 5. Nếu là chữ thường -> là phần tiếp theo
-              currentAnswer += ", " + part; // Nối vào câu hiện tại
+              currentAnswer += ", " + part;
             }
           }
         }
-
-        // Đừng quên đẩy câu trả lời cuối cùng vào
         if (currentAnswer) {
           results.push(currentAnswer);
         }
-
         return results.filter((item) => item && item.length > 0);
       }
-      // ============================================================
-      // END FIX 1
-      // ============================================================
 
-      // ============================================================
-      // START FIX: HÀM TÍNH ĐIỂM TRUNG BÌNH
-      // ============================================================
+      // ===================================================================
+      // PHẦN 2: CÁC HÀM TÍNH TOÁN (MEAN VÀ ĐỘ LỆCH CHUẨN)
+      // ===================================================================
+
       function getMeanScore(data, colName) {
         let totalScore = 0;
         let count = 0;
-
-        if (!colName) return 0; // Thêm kiểm tra colName
-
+        if (!colName) return 0;
         data.forEach((row) => {
           const val = String(row[colName] || "")
             .trim()
@@ -1374,22 +1299,16 @@
         });
         return count > 0 ? totalScore / count : 0;
       }
-      // ============================================================
-      // END FIX
-      // ============================================================
 
-      // ============================================================
-      // START FIX: HÀM TÍNH ĐỘ LỆCH CHUẨN (MỚI)
-      // ============================================================
       /**
        * Tính Độ lệch chuẩn Mẫu (s)
-       * s = sqrt( (sum[ (x_i - mean)^2 ]) / (n-1) )
+       * s = sqrt( (sum[ f * (x_i - mean)^2 ]) / (n-1) )
        */
       function getStandardDeviation(data, colName, mean) {
         if (!colName || mean === 0) return 0;
 
         let sumOfSquaredDeviations = 0;
-        let n = 0; // n là số lượng câu trả lời HỢP LỆ cho câu hỏi này
+        let n = 0; // n là số lượng câu trả lời HỢP LỆ
 
         data.forEach((row) => {
           const val = String(row[colName] || "")
@@ -1403,17 +1322,15 @@
           }
         });
 
-        // Bạn cần ít nhất 2 mẫu để tính độ lệch chuẩn mẫu
-        if (n <= 1) return 0;
+        if (n <= 1) return 0; // Cần ít nhất 2 mẫu
 
-        // Tính phương sai mẫu (chia cho n-1)
-        const variance = sumOfSquaredDeviations / (n - 1);
-        // Độ lệch chuẩn là căn bậc 2 của phương sai
+        const variance = sumOfSquaredDeviations / (n - 1); // Chia cho n-1
         return Math.sqrt(variance);
       }
-      // ============================================================
-      // END FIX
-      // ============================================================
+
+      // ===================================================================
+      // PHẦN 3: HÀM XỬ LÝ CHÍNH (GỌI TẤT CẢ PHÂN TÍCH)
+      // ===================================================================
 
       function processAllData() {
         const d = globalData;
@@ -1425,9 +1342,23 @@
           return;
         }
 
+        // ================================================
+        // BẮT ĐẦU PHẦN SỬA LỖI LOGIC
+        // ================================================
+
+        // Lấy tên cột một cách an toàn
+        const ageCol = getColumnByLetter("C");
+        const returnCol = getColumnByLetter("AJ");
+        const expCol = getColumnByLetter("X");
+        const refCol = getColumnByLetter("AI");
+        const priceCol = getColumnByLetter("AF");
+        const occupationCol = getColumnByLetter("E");
+        const locationCol = getColumnByLetter("D");
+
         const ageCounts = {};
         d.forEach((row) => {
-          const ageGroup = row["2. Độ tuổi:"];
+          // Đã sửa: Dùng ageCol thay vì hardcode "2. Độ tuổi:"
+          const ageGroup = row[ageCol];
           if (ageGroup) ageCounts[ageGroup] = (ageCounts[ageGroup] || 0) + 1;
         });
 
@@ -1442,9 +1373,7 @@
         document.getElementById("popularAgeGroup").textContent =
           popularAgeGroup;
 
-        // ==================================================
-        // START FIX: CẬP NHẬT THẺ TỔNG QUAN (OVERALL MEAN & SD)
-        // ==================================================
+        // Tính Mean và SD tổng thể (Câu 12) - Phần này đã đúng
         const satKeys = ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
         let overallTotalScore = 0;
         let overallCount = 0;
@@ -1468,7 +1397,6 @@
         const overallMean =
           overallCount > 0 ? overallTotalScore / overallCount : 0;
 
-        // Tính Độ lệch chuẩn Tổng thể
         let overallSumSqDev = 0;
         satKeys.forEach((letter) => {
           const colName = getColumnByLetter(letter);
@@ -1490,39 +1418,17 @@
           overallCount > 1 ? overallSumSqDev / (overallCount - 1) : 0;
         const overallStdDev = Math.sqrt(overallVariance);
 
-        // Cập nhật HTML
         document.getElementById("satisfactionRate").innerHTML = `
-          <span title="Điểm trung bình">${overallMean.toFixed(2)}</span>
-          <span class="text-2xl text-gray-500" title="Độ lệch chuẩn">(s=${overallStdDev.toFixed(
-            2
-          )})</span>
-        `;
-        // ==================================================
-        // END FIX
-        // ==================================================
+            <span title="Điểm trung bình">${overallMean.toFixed(2)}</span>
+            <span class="text-2xl text-gray-500" title="Độ lệch chuẩn">(s=${overallStdDev.toFixed(
+              2
+            )})</span>
+          `;
 
-        // ==================================================
-        // START FIX: Sửa logic thẻ thống kê (Cột AJ, X, AI, AF)
-        // ==================================================
-
-        // Return rate (Cột AJ)
-        const returnKey =
-          "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”";
-
-        let actualReturnKey = returnKey;
-        if (!globalData[0].hasOwnProperty(returnKey)) {
-          const oldKey =
-            'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"';
-          if (globalData[0].hasOwnProperty(oldKey)) {
-            actualReturnKey = oldKey;
-            console.log("Đã tự động sửa key 'Quay lại' (AJ) về key demo.");
-          } else {
-            console.error("Không tìm thấy key cho cột AJ (Quay lại)!");
-          }
-        }
-
+        // Phân tích các thẻ thống kê khác
         const returnYes = d.filter((row) => {
-          const val = row[actualReturnKey];
+          // Đã sửa: Dùng returnCol
+          const val = row[returnCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
           return valLower.includes("có") || valLower.includes("chắc chắn");
@@ -1530,11 +1436,9 @@
         const returnRate = ((returnYes / d.length) * 100).toFixed(1);
         document.getElementById("returnRate").textContent = returnRate + "%";
 
-        // Experience interest (Cột X)
-        const expKey =
-          '13. Ngoài tham quan và chụp ảnh, Anh/Chị có quan tâm đến các hoạt động mang tính "trải nghiệm" nông nghiệp không?';
         const expYes = d.filter((row) => {
-          const val = row[expKey];
+          // Đã sửa: Dùng expCol
+          const val = row[expCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
           return (
@@ -1548,11 +1452,9 @@
         document.getElementById("expInterestPercent").textContent =
           expRate + "%";
 
-        // Referral rate (Cột AI)
-        const refKey =
-          "Câu 18: Anh/Chị có sẵn lòng giới thiệu bạn bè/người thân đến Làng hoa Sa Đéc để tham gia du lịch nông nghiệp trải nghiệm không? ";
         const refYes = d.filter((row) => {
-          const val = row[refKey];
+          // Đã sửa: Dùng refCol
+          const val = row[refCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
           return (
@@ -1562,19 +1464,17 @@
         const refRate = ((refYes / d.length) * 100).toFixed(1);
         document.getElementById("referralPercent").textContent = refRate + "%";
 
-        // Average price (Cột AF)
-        const priceKey =
-          "15. Anh/Chị sẵn sàng chi trả bao nhiêu/người cho một gói hoạt động trải nghiệm (khoảng 2-3 tiếng, bao gồm hướng dẫn và thành phẩm mang về)?";
         const priceRanges = {
-          "100.000 - 200.000 VNĐ": 150000,
-          "200.000 - 300.000 VNĐ": 250000,
-          "Trên 300.000 VNĐ": 350000,
-          "Dưới 100.000 VNĐ": 80000,
+          "100.000 - 200.000 vnđ": 150000,
+          "200.000 - 300.000 vnđ": 250000,
+          "trên 300.000 vnđ": 350000,
+          "dưới 100.000 vnđ": 80000,
         };
         let totalPrice = 0,
           priceCount = 0;
         d.forEach((row) => {
-          const val = row[priceKey];
+          // Đã sửa: Dùng priceCol
+          const val = String(row[priceCol] || "").toLowerCase();
           if (val && priceRanges[val]) {
             totalPrice += priceRanges[val];
             priceCount++;
@@ -1584,12 +1484,15 @@
           priceCount > 0 ? Math.round(totalPrice / priceCount) : 0;
         document.getElementById("avgPrice").textContent =
           avgPrice > 0 ? (avgPrice / 1000).toFixed(0) + "K VNĐ" : "N/A";
-        // ==================================================
-        // END FIX
-        // ==================================================
 
-        renderTopList(d, "4. Nghề nghiệp của Anh/Chị:", "topOccupations");
-        renderTopList(d, "3. Nơi ở hiện tại:", "topLocations");
+        // Vẽ biểu đồ
+        // Đã sửa: Dùng tên cột đã lấy
+        renderTopList(d, occupationCol, "topOccupations");
+        renderTopList(d, locationCol, "topLocations");
+
+        // ================================================
+        // KẾT THÚC PHẦN SỬA LỖI LOGIC
+        // ================================================
 
         renderPieChart(d, "B", "genderChart", "doughnut");
         renderBarChart(d, "C", "ageChart");
@@ -1612,9 +1515,7 @@
           "Rất không hài lòng",
         ];
 
-        // ==================================================
-        // START FIX: TÍNH TOÁN VÀ HIỂN THỊ MEAN & SD CHO CÂU 12
-        // ==================================================
+        // Tính Mean & SD cho Câu 12
         const meanM = getMeanScore(d, getColumnByLetter("M"));
         const stdDevM = getStandardDeviation(d, getColumnByLetter("M"), meanM);
         document.getElementById("sat1Mean").textContent = meanM.toFixed(2);
@@ -1702,10 +1603,8 @@
           "sat11StdDev"
         ).textContent = `(s=${stdDevW.toFixed(2)})`;
         renderOrderedChart(d, "W", "sat11Chart", satOrder);
-        // ==================================================
-        // END FIX
-        // ==================================================
 
+        // Biểu đồ Trải nghiệm (Câu 13)
         const interestMapping = {
           5: "Rất quan tâm",
           4: "Quan tâm",
@@ -1722,21 +1621,104 @@
         );
         renderBarChart(d, "AF", "priceRangeChart");
 
-        // ==================================================
-        // START FIX: TÍNH TOÁN VÀ HIỂN THỊ MEAN & SD CHO CÂU 14
-        // ==================================================
+        // Bảng Mean & SD cho Câu 14
         const interestCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
         renderMeanList(d, interestCols, "interestMeanList");
+
+        // ==================================================
+        // START FIX: VẼ 7 BIỂU ĐỒ CHI TIẾT CHO CÂU 14
+        // ==================================================
+        const interestOrder = [
+          "Rất quan tâm",
+          "Quan tâm",
+          "Bình thường",
+          "Không quan tâm",
+          "Hoàn toàn không quan tâm",
+        ];
+
+        const meanY = getMeanScore(d, getColumnByLetter("Y"));
+        const stdDevY = getStandardDeviation(d, getColumnByLetter("Y"), meanY);
+        document.getElementById("int1Mean").textContent = meanY.toFixed(2);
+        document.getElementById(
+          "int1StdDev"
+        ).textContent = `(s=${stdDevY.toFixed(2)})`;
+        renderOrderedChart(d, "Y", "int1Chart", interestOrder);
+
+        const meanZ = getMeanScore(d, getColumnByLetter("Z"));
+        const stdDevZ = getStandardDeviation(d, getColumnByLetter("Z"), meanZ);
+        document.getElementById("int2Mean").textContent = meanZ.toFixed(2);
+        document.getElementById(
+          "int2StdDev"
+        ).textContent = `(s=${stdDevZ.toFixed(2)})`;
+        renderOrderedChart(d, "Z", "int2Chart", interestOrder);
+
+        const meanAA = getMeanScore(d, getColumnByLetter("AA"));
+        const stdDevAA = getStandardDeviation(
+          d,
+          getColumnByLetter("AA"),
+          meanAA
+        );
+        document.getElementById("int3Mean").textContent = meanAA.toFixed(2);
+        document.getElementById(
+          "int3StdDev"
+        ).textContent = `(s=${stdDevAA.toFixed(2)})`;
+        renderOrderedChart(d, "AA", "int3Chart", interestOrder);
+
+        const meanAB = getMeanScore(d, getColumnByLetter("AB"));
+        const stdDevAB = getStandardDeviation(
+          d,
+          getColumnByLetter("AB"),
+          meanAB
+        );
+        document.getElementById("int4Mean").textContent = meanAB.toFixed(2);
+        document.getElementById(
+          "int4StdDev"
+        ).textContent = `(s=${stdDevAB.toFixed(2)})`;
+        renderOrderedChart(d, "AB", "int4Chart", interestOrder);
+
+        const meanAC = getMeanScore(d, getColumnByLetter("AC"));
+        const stdDevAC = getStandardDeviation(
+          d,
+          getColumnByLetter("AC"),
+          meanAC
+        );
+        document.getElementById("int5Mean").textContent = meanAC.toFixed(2);
+        document.getElementById(
+          "int5StdDev"
+        ).textContent = `(s=${stdDevAC.toFixed(2)})`;
+        renderOrderedChart(d, "AC", "int5Chart", interestOrder);
+
+        const meanAD = getMeanScore(d, getColumnByLetter("AD"));
+        const stdDevAD = getStandardDeviation(
+          d,
+          getColumnByLetter("AD"),
+          meanAD
+        );
+        document.getElementById("int6Mean").textContent = meanAD.toFixed(2);
+        document.getElementById(
+          "int6StdDev"
+        ).textContent = `(s=${stdDevAD.toFixed(2)})`;
+        renderOrderedChart(d, "AD", "int6Chart", interestOrder);
+
+        const meanAE = getMeanScore(d, getColumnByLetter("AE"));
+        const stdDevAE = getStandardDeviation(
+          d,
+          getColumnByLetter("AE"),
+          meanAE
+        );
+        document.getElementById("int7Mean").textContent = meanAE.toFixed(2);
+        document.getElementById(
+          "int7StdDev"
+        ).textContent = `(s=${stdDevAE.toFixed(2)})`;
+        renderOrderedChart(d, "AE", "int7Chart", interestOrder);
         // ==================================================
         // END FIX
         // ==================================================
 
-        const expCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
-        renderMultiColChart(d, expCols, "expActivitiesChart");
-
         renderMultiChart(d, "AG", "attractionFactorsChart");
         renderMultiChart(d, "AH", "improvementChart");
 
+        // Biểu đồ Câu 18
         const referralMapping = {
           5: "Rất sẵn lòng",
           4: "Sẵn lòng",
@@ -1756,6 +1738,10 @@
 
         renderFeedbackList(d, "AK", "AL", "feedbackListBox");
       }
+
+      // ===================================================================
+      // PHẦN 4: CÁC HÀM VẼ BIỂU ĐỒ VÀ HIỂN THỊ
+      // ===================================================================
 
       function getColumnByLetter(letter) {
         if (Object.keys(columnMapping).length === 0) {
@@ -1785,26 +1771,23 @@
         const html = sorted
           .map(
             ([label, count], i) => `
-                <div class="mb-2">
-                    <div class="flex justify-between mb-1">
-                        <span class="font-medium text-sm text-gray-800">${label}</span>
-                        <span class="text-sm text-gray-600">${count} người</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${
-                          (count / max) * 100
-                        }%; background: ${colors[i % colors.length]}"></div>
-                    </div>
-                </div>
-              `
+                  <div class="mb-2">
+                      <div class="flex justify-between mb-1">
+                          <span class="font-medium text-sm text-gray-800">${label}</span>
+                          <span class="text-sm text-gray-600">${count} người</span>
+                      </div>
+                      <div class="progress-bar">
+                          <div class="progress-fill" style="width: ${
+                            (count / max) * 100
+                          }%; background: ${colors[i % colors.length]}"></div>
+                      </div>
+                  </div>
+                `
           )
           .join("");
         document.getElementById(elementId).innerHTML = html;
       }
 
-      // ============================================================
-      // START FIX: HÀM MỚI ĐỂ HIỂN THỊ DANH SÁCH ĐIỂM MEAN & SD
-      // ============================================================
       function renderMeanList(data, colLetters, elementId) {
         const container = document.getElementById(elementId);
         if (!container) return;
@@ -1816,45 +1799,42 @@
 
             const labelMatch = colName.match(/\[(.*?)\]/);
             const label = labelMatch ? labelMatch[1] : colName;
-            const mean = getMeanScore(data, colName); // Tính Mean
-            const stdDev = getStandardDeviation(data, colName, mean); // Tính SD
-            return { label, mean, stdDev }; // Trả về cả 2
+            const mean = getMeanScore(data, colName);
+            const stdDev = getStandardDeviation(data, colName, mean);
+            return { label, mean, stdDev };
           })
           .filter((item) => item && item.mean > 0)
-          .sort((a, b) => b.mean - a.mean); // Sắp xếp theo điểm TB cao nhất
+          .sort((a, b) => b.mean - a.mean);
 
-        const maxMean = 5; // Điểm tối đa là 5
+        const maxMean = 5;
 
         const html = meanData
           .map(
             ({ label, mean, stdDev }, i) => `
-              <div class="mb-2">
-                <div class="flex justify-between mb-1">
-                  <span class="font-medium text-sm text-gray-800">${label}</span>
-                  <div class="flex items-baseline flex-shrink-0 ml-2">
-                    <span class="text-sm text-gray-900 font-bold" title="Điểm trung bình">${mean.toFixed(
-                      2
-                    )}</span>
-                    <span class="text-xs text-gray-500 font-medium ml-1" title="Độ lệch chuẩn">(s=${stdDev.toFixed(
-                      2
-                    )})</span>
+                  <div class="mb-2">
+                    <div class="flex justify-between mb-1">
+                      <span class="font-medium text-sm text-gray-800">${label}</span>
+                      <div class="flex items-baseline flex-shrink-0 ml-2">
+                        <span class="text-sm text-gray-900 font-bold" title="Điểm trung bình">${mean.toFixed(
+                          2
+                        )}</span>
+                        <span class="text-xs text-gray-500 font-medium ml-1" title="Độ lệch chuẩn">(s=${stdDev.toFixed(
+                          2
+                        )})</span>
+                      </div>
+                    </div>
+                    <div class="progress-bar">
+                      <div class="progress-fill" style="width: ${
+                        (mean / maxMean) * 100
+                      }%; background: ${colors[i % colors.length]}"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: ${
-                    (mean / maxMean) * 100
-                  }%; background: ${colors[i % colors.length]}"></div>
-                </div>
-              </div>
-            `
+                `
           )
           .join("");
 
         container.innerHTML = html;
       }
-      // ============================================================
-      // END FIX
-      // ============================================================
 
       function renderPieChart(data, colLetter, canvasId, type) {
         const colName = getColumnByLetter(colLetter);
@@ -1924,9 +1904,6 @@
         createChart(canvasId, "bar", labels, values, false);
       }
 
-      // ============================================================
-      // HÀM RENDER MULTI CHART - ĐÃ CẬP NHẬT SỬ DỤNG SMART SPLIT
-      // ============================================================
       function renderMultiChart(data, colLetter, canvasId) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -1938,7 +1915,6 @@
         data.forEach((row) => {
           const val = row[colName];
           if (val) {
-            // SỬ DỤNG HÀM TÁCH THÔNG MINH
             const answers = smartSplitAnswers(val);
             answers.forEach((item) => {
               if (item) counts[item] = (counts[item] || 0) + 1;
@@ -1957,47 +1933,7 @@
         );
       }
 
-      function renderMultiColChart(data, colLetters, canvasId) {
-        const counts = {};
-
-        colLetters.forEach((letter) => {
-          const colName = getColumnByLetter(letter);
-          if (!colName) {
-            console.error(
-              `(MultiCol) Không tìm thấy cột cho chữ cái: ${letter}`
-            );
-            return;
-          }
-
-          data.forEach((row) => {
-            const val = row[colName];
-            const valLower = String(val).toLowerCase();
-            // CHỈ ĐẾM CÁC CÂU TRẢ LỜI QUAN TÂM
-            if (
-              val &&
-              (valLower.includes("quan tâm") ||
-                valLower === "4" ||
-                valLower === "5")
-            ) {
-              const activityMatch = colName.match(/\[(.*?)\]/);
-              if (activityMatch) {
-                const activity = activityMatch[1];
-                counts[activity] = (counts[activity] || 0) + 1;
-              }
-            }
-          });
-        });
-
-        const sorted = Object.entries(counts).sort(([, a], [, b]) => b - a);
-        createChart(
-          canvasId,
-          "bar",
-          sorted.map((e) => e[0]),
-          sorted.map((e) => e[1]),
-          false,
-          true
-        );
-      }
+      // Đã xóa hàm 'renderMultiColChart' bị chú thích
 
       function renderFeedbackList(
         data,
@@ -2021,7 +1957,6 @@
             const feeling = row[feelingCol] || null;
             const suggestion = row[suggestionCol] || null;
 
-            // Lọc ra các câu trả lời "không", "ko"...
             const hasMeaningfulSuggestion =
               suggestion &&
               suggestion.trim().length > 3 &&
@@ -2037,28 +1972,27 @@
 
             if (hasMeaningfulFeeling || hasMeaningfulSuggestion) {
               return `
-                                <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
-                                    <div class="flex items-start gap-3 mb-3">
-                                        <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
-                                        <div class="text-gray-700 text-sm leading-relaxed w-full">
-                                            <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
-                                            <p class="mt-1">${
-                                              feeling || "<em>(Không có)</em>"
-                                            }</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start gap-3">
-                                        <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
-                                        <div class="text-gray-700 text-sm leading-relaxed w-full">
-                                            <strong class="text-gray-900">Đề xuất:</strong>
-                                            <p class="mt-1">${
-                                              suggestion ||
-                                              "<em>(Không có)</em>"
-                                            }</p>
-                                        </div>
-                                    </div>
-                                </div>
-                              `;
+                  <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
+                      <div class="flex items-start gap-3 mb-3">
+                          <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
+                          <div class="text-gray-700 text-sm leading-relaxed w-full">
+                              <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
+                              <p class="mt-1">${
+                                feeling || "<em>(Không có)</em>"
+                              }</p>
+                          </div>
+                      </div>
+                      <div class="flex items-start gap-3">
+                          <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
+                          <div class="text-gray-700 text-sm leading-relaxed w-full">
+                              <strong class="text-gray-900">Đề xuất:</strong>
+                              <p class="mt-1">${
+                                suggestion || "<em>(Không có)</em>"
+                              }</p>
+                          </div>
+                      </div>
+                  </div>
+                `;
             }
             return "";
           })
@@ -2087,17 +2021,13 @@
 
         data.forEach((row) => {
           const val = String(row[colName]).trim();
-          // Thử tìm key dạng số (1, 2, 3...)
           let label = mapping[val];
-
-          // Nếu không thấy, thử tìm key dạng chữ (Rất quan tâm, ...)
           if (!label) {
             const foundLabel = Object.values(mapping).find(
               (l) => l.toLowerCase() === val.toLowerCase()
             );
             if (foundLabel) label = foundLabel;
           }
-
           if (label) {
             counts[label] = (counts[label] || 0) + 1;
           }
@@ -2214,10 +2144,42 @@
         charts[canvasId] = new Chart(ctx, config);
       }
 
+      // ================================================
+      // BẮT ĐẦU PHẦN SỬA LỖI (BỔ SUNG HÀM)
+      // ================================================
+
+      // ===================================================================
+      // PHẦN 5: HÀM UI (ĐIỀU HƯỚNG TAB) - BỊ THIẾU TRONG CODE GỐC
+      // ===================================================================
+
+      function showSection(sectionId, clickedButton) {
+        // 1. Ẩn tất cả các section content
+        document.querySelectorAll(".section-content").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // 2. Bỏ active tất cả các nút
+        document.querySelectorAll(".nav-btn").forEach((button) => {
+          button.classList.remove("active");
+        });
+
+        // 3. Hiển thị section được chọn
+        const activeSection = document.getElementById(sectionId + "-section");
+        if (activeSection) {
+          activeSection.classList.add("active");
+        }
+
+        // 4. Kích hoạt nút được nhấp
+        if (clickedButton) {
+          clickedButton.classList.add("active");
+        }
+      }
+
+      // ================================================
+      // KẾT THÚC PHẦN SỬA LỖI (BỔ SUNG HÀM)
+      // ================================================
+
       function exportSummary() {
-        // ==================================================
-        // START FIX: CẬP NHẬT HÀM XUẤT BÁO CÁO VỚI SD
-        // ==================================================
         const satMeanElement = document.getElementById("satisfactionRate");
         const satMeanText =
           satMeanElement.textContent || satMeanElement.innerText;
@@ -2236,64 +2198,63 @@
         }
 
         const summary = `
-    BÁO CÁO TÓM TẮT KHẢO SÁT
-    Phát triển sản phẩm du lịch nông nghiệp trải nghiệm tại Làng hoa Sa Đéc, tỉnh Đồng Tháp
+      BÁO CÁO TÓM TẮT KHẢO SÁT
+      Phát triển sản phẩm du lịch nông nghiệp trải nghiệm tại Làng hoa Sa Đéc, tỉnh Đồng Tháp
 
-    ═══════════════════════════════════════════════════════
+      ═══════════════════════════════════════════════════════
 
-    📊 TỔNG QUAN
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    • Tổng số phản hồi: ${document.getElementById("totalResponses").textContent}
-    • Nhóm tuổi phổ biến: ${
-      document.getElementById("popularAgeGroup").textContent
-    }
-    • Điểm hài lòng (Tổng thể): ${satMeanText.replace("\n", " ")}
-    • Sẵn sàng quay lại: ${document.getElementById("returnRate").textContent}
+      📊 TỔNG QUAN
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      • Tổng số phản hồi: ${
+        document.getElementById("totalResponses").textContent
+      }
+      • Nhóm tuổi phổ biến: ${
+        document.getElementById("popularAgeGroup").textContent
+      }
+      • Điểm hài lòng (Tổng thể): ${satMeanText.replace("\n", " ")}
+      • Sẵn sàng quay lại: ${document.getElementById("returnRate").textContent}
 
-    📈 NHỮNG PHÁT HIỆN CHÍNH
-    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    • Quan tâm trải nghiệm nông nghiệp: ${
-      document.getElementById("expInterestPercent").textContent
-    }
-    • Sẵn sàng giới thiệu bạn bè: ${
-      document.getElementById("referralPercent").textContent
-    }
-    • Mức giá chấp nhận (trung bình): ${
-      document.getElementById("avgPrice").textContent
-    }
-    • Hoạt động được quan tâm nhất: ${interestSummary}
+      📈 NHỮNG PHÁT HIỆN CHÍNH
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      • Quan tâm trải nghiệm nông nghiệp: ${
+        document.getElementById("expInterestPercent").textContent
+      }
+      • Sẵn sàng giới thiệu bạn bè: ${
+        document.getElementById("referralPercent").textContent
+      }
+      • Mức giá chấp nhận (trung bình): ${
+        document.getElementById("avgPrice").textContent
+      }
+      • Hoạt động được quan tâm nhất: ${interestSummary}
 
-    ═══════════════════════════════════════════════════════
+      ═══════════════════════════════════════════════════════
 
-    🎯 KẾT LUẬN VÀ KHUYẾN NGHỊ
+      🎯 KẾT LUẬN VÀ KHUYẾN NGHỊ
 
-    Dựa trên kết quả khảo sát, có thể thấy:
+      Dựa trên kết quả khảo sát, có thể thấy:
 
-    1. MỨC ĐỘ QUAN TÂM: Du khách có mức độ quan tâm cao đến các hoạt động
-       trải nghiệm nông nghiệp tại Làng hoa Sa Đéc.
+      1. MỨC ĐỘ QUAN TÂM: Du khách có mức độ quan tâm cao đến các hoạt động
+         trải nghiệm nông nghiệp tại Làng hoa Sa Đéc.
 
-    2. TIỀM NĂNG PHÁT TRIỂN: Với điểm hài lòng tổng thể tốt và tỷ lệ
-       sẵn sàng quay lại cao, đây là cơ hội lớn để phát triển
-       sản phẩm du lịch trải nghiệm.
+      2. TIỀM NĂNG PHÁT TRIỂN: Với điểm hài lòng tổng thể tốt và tỷ lệ
+         sẵn sàng quay lại cao, đây là cơ hội lớn để phát triển
+         sản phẩm du lịch trải nghiệm.
 
-    3. MỨC GIÁ HỢP LÝ: Du khách sẵn sàng chi trả với mức giá trung bình
-       phù hợp cho các gói trải nghiệm 2-3 tiếng.
+      3. MỨC GIÁ HỢP LÝ: Du khách sẵn sàng chi trả với mức giá trung bình
+         phù hợp cho các gói trải nghiệm 2-3 tiếng.
 
-    4. ĐỀ XUẤT PHÁT TRIỂN (Dựa trên điểm TB cao nhất):
-       - Phát triển các hoạt động được quan tâm nhất: ${interestSummary}.
-       - Cải thiện các yếu tố có điểm hài lòng thấp (kiểm tra tab "Mức độ hài lòng").
-       - Tăng cường đào tạo nhân viên và nông dân địa phương.
-       - Quảng bá rộng rãi trên các kênh truyền thông.
+      4. ĐỀ XUẤT PHÁT TRIỂN (Dựa trên điểm TB cao nhất):
+         - Phát triển các hoạt động được quan tâm nhất: ${interestSummary}.
+         - Cải thiện các yếu tố có điểm hài lòng thấp (kiểm tra tab "Mức độ hài lòng").
+         - Tăng cường đào tạo nhân viên và nông dân địa phương.
+         - Quảng bá rộng rãi trên các kênh truyền thông.
 
-    ═══════════════════════════════════════════════════════
+      ═══════════════════════════════════════════════════════
 
-    Báo cáo được tạo tự động từ Dashboard Phân Tích Khảo Sát
-    Trường Đại học Công Nghiệp TP.HCM - Khoa Thương mại - Du lịch
-    Ngày xuất: ${new Date().toLocaleDateString("vi-VN")}
-        `;
-        // ==================================================
-        // END FIX
-        // ==================================================
+      Báo cáo được tạo tự động từ Dashboard Phân Tích Khảo Sát
+      Trường Đại học Công Nghiệp TP.HCM - Khoa Thương mại - Du lịch
+      Ngày xuất: ${new Date().toLocaleDateString("vi-VN")}
+          `;
 
         const blob = new Blob([summary], { type: "text/plain;charset=utf-8" });
         const url = URL.createObjectURL(blob);
