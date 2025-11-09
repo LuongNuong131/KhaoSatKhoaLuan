@@ -493,10 +493,18 @@
             </p>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
-            <p class="text-gray-600 text-sm font-medium mb-1">Tỷ lệ hài lòng</p>
-            <p id="satisfactionRate" class="text-5xl font-bold text-green-600">
-              0%
+            <p class="text-gray-600 text-sm font-medium mb-1">
+              Điểm hài lòng TB
             </p>
+            <div
+              id="satisfactionRate"
+              class="text-4xl font-bold text-purple-600"
+            >
+              <span title="Điểm trung bình">0.00</span>
+              <span class="text-2xl text-gray-500" title="Độ lệch chuẩn"
+                >(s=0.00)</span
+              >
+            </div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl card-hover">
             <p class="text-gray-600 text-sm font-medium mb-1">
@@ -628,68 +636,244 @@
 
       <div id="satisfaction-section" class="section-content">
         <div class="highlight-box mb-6">
-          <p>📊 Đánh giá mức độ hài lòng về 11 yếu tố tại Làng hoa Sa Đéc</p>
+          <p>
+            📊 Đánh giá mức độ hài lòng về 11 yếu tố tại Làng hoa Sa Đéc (Mean &
+            Độ lệch chuẩn)
+          </p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Sự phong phú loại hoa</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Sự phong phú loại hoa</h3>
+              <div>
+                <span
+                  id="sat1Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat1StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat1Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Sự hiếu khách</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Sự hiếu khách</h3>
+              <div>
+                <span
+                  id="sat2Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat2StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat2Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Cảnh quan & vệ sinh</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Cảnh quan & vệ sinh</h3>
+              <div>
+                <span
+                  id="sat3Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat3StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat3Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Thái độ nhân viên</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Thái độ nhân viên</h3>
+              <div>
+                <span
+                  id="sat4Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat4StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat4Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Cơ sở hạ tầng</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Cơ sở hạ tầng</h3>
+              <div>
+                <span
+                  id="sat5Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat5StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat5Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Nét độc đáo</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Nét độc đáo</h3>
+              <div>
+                <span
+                  id="sat6Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat6StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat6Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Chất lượng dịch vụ</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Chất lượng dịch vụ</h3>
+              <div>
+                <span
+                  id="sat7Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat7StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat7Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Giá cả dịch vụ</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Giá cả dịch vụ</h3>
+              <div>
+                <span
+                  id="sat8Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat8StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat8Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Sự an toàn</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Sự an toàn</h3>
+              <div>
+                <span
+                  id="sat9Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat9StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat9Chart"></canvas></div>
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
-            <h3 class="text-lg font-bold mb-4">Đa dạng hoạt động</h3>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Đa dạng hoạt động</h3>
+              <div>
+                <span
+                  id="sat10Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat10StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat10Chart"></canvas></div>
           </div>
-          <div
-            class="glassmorphism rounded-2xl p-6 shadow-xl lg:col-span-2 xl:col-span-3"
-          >
-            <h3 class="text-lg font-bold mb-4">Tính kết nối tour</h3>
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-bold">Tính kết nối tour</h3>
+              <div>
+                <span
+                  id="sat11Mean"
+                  class="text-2xl font-bold text-purple-600"
+                  title="Điểm trung bình"
+                  >0.00</span
+                >
+                <span
+                  id="sat11StdDev"
+                  class="text-lg font-medium text-gray-500"
+                  title="Độ lệch chuẩn"
+                  >(s=0.00)</span
+                >
+              </div>
+            </div>
             <div class="chart-wrapper"><canvas id="sat11Chart"></canvas></div>
           </div>
         </div>
       </div>
-
       <div id="experience-section" class="section-content">
         <div class="highlight-box mb-6">
           <p>
             🌱 Nhu cầu và kỳ vọng về phát triển du lịch nông nghiệp trải nghiệm
           </p>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Quan tâm trải nghiệm nông nghiệp?
+              Quan tâm trải nghiệm nông nghiệp? (Câu 13)
             </h3>
             <div class="chart-wrapper">
               <canvas id="expInterestChart"></canvas>
@@ -697,43 +881,51 @@
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Mức chi trả mong muốn
+              Mức chi trả mong muốn (Câu 15)
             </h3>
             <div class="chart-wrapper">
               <canvas id="priceRangeChart"></canvas>
             </div>
           </div>
-        </div>
 
-        <div class="glassmorphism rounded-2xl p-6 shadow-xl mb-6">
-          <h3 class="section-title text-xl font-bold mb-6">
-            Hoạt động trải nghiệm muốn phát triển
-          </h3>
-          <div class="chart-wrapper-large">
-            <canvas id="expActivitiesChart"></canvas>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 gap-6">
-          <div class="glassmorphism rounded-2xl p-6 shadow-xl mb-6">
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Yếu tố thu hút tham gia
+              📊 Điểm quan tâm TB (Câu 14)
             </h3>
-            <div class="chart-wrapper-large">
+            <div
+              id="interestMeanList"
+              class="space-y-3 max-h-[300px] overflow-y-auto pr-2"
+            ></div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Hoạt động muốn P.Triển (Lượt chọn, Câu 14)
+            </h3>
+            <div class="chart-wrapper" style="height: 300px">
+              <canvas id="expActivitiesChart"></canvas>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 shadow-xl">
+            <h3 class="section-title text-xl font-bold mb-6">
+              Yếu tố thu hút tham gia (Câu 16)
+            </h3>
+            <div class="chart-wrapper-large" style="height: 400px">
               <canvas id="attractionFactorsChart"></canvas>
             </div>
           </div>
+
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Yếu tố cần cải thiện
+              Yếu tố cần cải thiện (Câu 17)
             </h3>
-            <div class="chart-wrapper-large">
+            <div class="chart-wrapper-large" style="height: 400px">
               <canvas id="improvementChart"></canvas>
             </div>
           </div>
         </div>
       </div>
-
       <div id="future-section" class="section-content">
         <div class="highlight-box mb-6">
           <p>🚀 Dự định và cam kết của du khách với Làng hoa Sa Đéc</p>
@@ -741,7 +933,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Giới thiệu bạn bè?
+              Giới thiệu bạn bè? (Câu 18)
             </h3>
             <div class="chart-wrapper">
               <canvas id="referralChart"></canvas>
@@ -749,7 +941,7 @@
           </div>
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Dự định quay lại?
+              Dự định quay lại? (Câu 19)
             </h3>
             <div class="chart-wrapper"><canvas id="returnChart"></canvas></div>
           </div>
@@ -763,7 +955,7 @@
         <div class="grid grid-cols-1 gap-6">
           <div class="glassmorphism rounded-2xl p-6 shadow-xl">
             <h3 class="section-title text-xl font-bold mb-6">
-              Danh sách Cảm nhận & Đề xuất
+              Danh sách Cảm nhận (Câu 20) & Đề xuất (Câu 21)
             </h3>
             <div
               id="feedbackListBox"
@@ -804,6 +996,35 @@
       let globalData = [];
       let columnMapping = {};
 
+      // ============================================================
+      // START FIX: THÊM BẢN ĐỒ ĐIỂM (SCORE MAP)
+      // ============================================================
+      const scoreMap = {
+        // Thang điểm Hài lòng (Câu 12)
+        "rất không hài lòng": 1,
+        "không hài lòng": 2,
+        "bình thường": 3,
+        "hài lòng": 4,
+        "rất hài lòng": 5,
+
+        // Thang điểm Quan tâm (Câu 14)
+        "hoàn toàn không quan tâm": 1,
+        "không quan tâm": 2,
+        // "bình thường" đã là 3
+        "quan tâm": 4,
+        "rất quan tâm": 5,
+
+        // Thang điểm dạng Số (Câu 13, 18)
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+      };
+      // ============================================================
+      // END FIX
+      // ============================================================
+
       function showSection(section, element) {
         document
           .querySelectorAll(".section-content")
@@ -820,10 +1041,13 @@
       async function loadData() {
         try {
           console.log("Đang tải dữ liệu từ data.json...");
+          // !!! QUAN TRỌNG: Hãy đảm bảo file "data.json" nằm CÙNG THƯ MỤC với file HTML này
           const response = await fetch("data.json");
 
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(
+              `HTTP error! status: ${response.status}. Không tìm thấy file data.json?`
+            );
           }
 
           const rawData = await response.json();
@@ -933,6 +1157,7 @@
       }
 
       function generateDemoData() {
+        // ... (Hàm này không thay đổi, giữ nguyên) ...
         const genders = ["Nam", "Nữ"];
         const ages = ["18-25", "26-35", "36-45", "46-55", "Trên 55"];
         const locations = [
@@ -1128,6 +1353,68 @@
       // END FIX 1
       // ============================================================
 
+      // ============================================================
+      // START FIX: HÀM TÍNH ĐIỂM TRUNG BÌNH
+      // ============================================================
+      function getMeanScore(data, colName) {
+        let totalScore = 0;
+        let count = 0;
+
+        if (!colName) return 0; // Thêm kiểm tra colName
+
+        data.forEach((row) => {
+          const val = String(row[colName] || "")
+            .trim()
+            .toLowerCase();
+          const score = scoreMap[val];
+          if (score) {
+            totalScore += score;
+            count++;
+          }
+        });
+        return count > 0 ? totalScore / count : 0;
+      }
+      // ============================================================
+      // END FIX
+      // ============================================================
+
+      // ============================================================
+      // START FIX: HÀM TÍNH ĐỘ LỆCH CHUẨN (MỚI)
+      // ============================================================
+      /**
+       * Tính Độ lệch chuẩn Mẫu (s)
+       * s = sqrt( (sum[ (x_i - mean)^2 ]) / (n-1) )
+       */
+      function getStandardDeviation(data, colName, mean) {
+        if (!colName || mean === 0) return 0;
+
+        let sumOfSquaredDeviations = 0;
+        let n = 0; // n là số lượng câu trả lời HỢP LỆ cho câu hỏi này
+
+        data.forEach((row) => {
+          const val = String(row[colName] || "")
+            .trim()
+            .toLowerCase();
+          const score = scoreMap[val];
+          if (score) {
+            const deviation = score - mean;
+            sumOfSquaredDeviations += deviation * deviation;
+            n++;
+          }
+        });
+
+        // Bạn cần ít nhất 2 mẫu để tính độ lệch chuẩn mẫu
+        if (n <= 1) return 0;
+
+        // Tính phương sai mẫu (chia cho n-1)
+        const variance = sumOfSquaredDeviations / (n - 1);
+        // Độ lệch chuẩn là căn bậc 2 của phương sai
+        return Math.sqrt(variance);
+      }
+      // ============================================================
+      // END FIX
+      // ============================================================
+
       function processAllData() {
         const d = globalData;
         document.getElementById("totalResponses").textContent = d.length;
@@ -1155,37 +1442,75 @@
         document.getElementById("popularAgeGroup").textContent =
           popularAgeGroup;
 
-        const satKeys = Object.keys(d[0]).filter((k) =>
-          k.includes("12. Anh/Chị vui lòng đánh giá")
-        );
-        let satisfiedTotal = 0,
-          satCount = 0;
-        d.forEach((row) => {
-          satKeys.forEach((key) => {
-            const val = row[key];
-            if (val) {
-              satCount++;
-              if (val === "Rất hài lòng" || val === "Hài lòng")
-                satisfiedTotal++;
-            }
-          });
+        // ==================================================
+        // START FIX: CẬP NHẬT THẺ TỔNG QUAN (OVERALL MEAN & SD)
+        // ==================================================
+        const satKeys = ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
+        let overallTotalScore = 0;
+        let overallCount = 0;
+
+        satKeys.forEach((letter) => {
+          const colName = getColumnByLetter(letter);
+          if (colName) {
+            d.forEach((row) => {
+              const val = String(row[colName] || "")
+                .trim()
+                .toLowerCase();
+              const score = scoreMap[val];
+              if (score) {
+                overallTotalScore += score;
+                overallCount++;
+              }
+            });
+          }
         });
-        const satRate =
-          satCount > 0 ? ((satisfiedTotal / satCount) * 100).toFixed(1) : "0";
-        document.getElementById("satisfactionRate").textContent = satRate + "%";
+
+        const overallMean =
+          overallCount > 0 ? overallTotalScore / overallCount : 0;
+
+        // Tính Độ lệch chuẩn Tổng thể
+        let overallSumSqDev = 0;
+        satKeys.forEach((letter) => {
+          const colName = getColumnByLetter(letter);
+          if (colName) {
+            d.forEach((row) => {
+              const val = String(row[colName] || "")
+                .trim()
+                .toLowerCase();
+              const score = scoreMap[val];
+              if (score) {
+                const deviation = score - overallMean;
+                overallSumSqDev += deviation * deviation;
+              }
+            });
+          }
+        });
+
+        const overallVariance =
+          overallCount > 1 ? overallSumSqDev / (overallCount - 1) : 0;
+        const overallStdDev = Math.sqrt(overallVariance);
+
+        // Cập nhật HTML
+        document.getElementById("satisfactionRate").innerHTML = `
+          <span title="Điểm trung bình">${overallMean.toFixed(2)}</span>
+          <span class="text-2xl text-gray-500" title="Độ lệch chuẩn">(s=${overallStdDev.toFixed(
+            2
+          )})</span>
+        `;
+        // ==================================================
+        // END FIX
+        // ==================================================
 
         // ==================================================
-        // START FIX 2: Sửa logic thẻ thống kê (Cột AJ, X, AI, AF)
+        // START FIX: Sửa logic thẻ thống kê (Cột AJ, X, AI, AF)
         // ==================================================
 
         // Return rate (Cột AJ)
-        // Key này lấy từ file data.json BẠN MỚI GỬI (kết thúc bằng ?")
         const returnKey =
           "Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”";
 
         let actualReturnKey = returnKey;
         if (!globalData[0].hasOwnProperty(returnKey)) {
-          // Thử key cũ (demo)
           const oldKey =
             'Câu 19. Anh/Chị có dự định quay lại Làng hoa Sa Đéc trong thời gian tới không?”"';
           if (globalData[0].hasOwnProperty(oldKey)) {
@@ -1260,7 +1585,7 @@
         document.getElementById("avgPrice").textContent =
           avgPrice > 0 ? (avgPrice / 1000).toFixed(0) + "K VNĐ" : "N/A";
         // ==================================================
-        // END FIX 2
+        // END FIX
         // ==================================================
 
         renderTopList(d, "4. Nghề nghiệp của Anh/Chị:", "topOccupations");
@@ -1286,17 +1611,100 @@
           "Không hài lòng",
           "Rất không hài lòng",
         ];
+
+        // ==================================================
+        // START FIX: TÍNH TOÁN VÀ HIỂN THỊ MEAN & SD CHO CÂU 12
+        // ==================================================
+        const meanM = getMeanScore(d, getColumnByLetter("M"));
+        const stdDevM = getStandardDeviation(d, getColumnByLetter("M"), meanM);
+        document.getElementById("sat1Mean").textContent = meanM.toFixed(2);
+        document.getElementById(
+          "sat1StdDev"
+        ).textContent = `(s=${stdDevM.toFixed(2)})`;
         renderOrderedChart(d, "M", "sat1Chart", satOrder);
+
+        const meanN = getMeanScore(d, getColumnByLetter("N"));
+        const stdDevN = getStandardDeviation(d, getColumnByLetter("N"), meanN);
+        document.getElementById("sat2Mean").textContent = meanN.toFixed(2);
+        document.getElementById(
+          "sat2StdDev"
+        ).textContent = `(s=${stdDevN.toFixed(2)})`;
         renderOrderedChart(d, "N", "sat2Chart", satOrder);
+
+        const meanO = getMeanScore(d, getColumnByLetter("O"));
+        const stdDevO = getStandardDeviation(d, getColumnByLetter("O"), meanO);
+        document.getElementById("sat3Mean").textContent = meanO.toFixed(2);
+        document.getElementById(
+          "sat3StdDev"
+        ).textContent = `(s=${stdDevO.toFixed(2)})`;
         renderOrderedChart(d, "O", "sat3Chart", satOrder);
+
+        const meanP = getMeanScore(d, getColumnByLetter("P"));
+        const stdDevP = getStandardDeviation(d, getColumnByLetter("P"), meanP);
+        document.getElementById("sat4Mean").textContent = meanP.toFixed(2);
+        document.getElementById(
+          "sat4StdDev"
+        ).textContent = `(s=${stdDevP.toFixed(2)})`;
         renderOrderedChart(d, "P", "sat4Chart", satOrder);
+
+        const meanQ = getMeanScore(d, getColumnByLetter("Q"));
+        const stdDevQ = getStandardDeviation(d, getColumnByLetter("Q"), meanQ);
+        document.getElementById("sat5Mean").textContent = meanQ.toFixed(2);
+        document.getElementById(
+          "sat5StdDev"
+        ).textContent = `(s=${stdDevQ.toFixed(2)})`;
         renderOrderedChart(d, "Q", "sat5Chart", satOrder);
+
+        const meanR = getMeanScore(d, getColumnByLetter("R"));
+        const stdDevR = getStandardDeviation(d, getColumnByLetter("R"), meanR);
+        document.getElementById("sat6Mean").textContent = meanR.toFixed(2);
+        document.getElementById(
+          "sat6StdDev"
+        ).textContent = `(s=${stdDevR.toFixed(2)})`;
         renderOrderedChart(d, "R", "sat6Chart", satOrder);
+
+        const meanS = getMeanScore(d, getColumnByLetter("S"));
+        const stdDevS = getStandardDeviation(d, getColumnByLetter("S"), meanS);
+        document.getElementById("sat7Mean").textContent = meanS.toFixed(2);
+        document.getElementById(
+          "sat7StdDev"
+        ).textContent = `(s=${stdDevS.toFixed(2)})`;
         renderOrderedChart(d, "S", "sat7Chart", satOrder);
+
+        const meanT = getMeanScore(d, getColumnByLetter("T"));
+        const stdDevT = getStandardDeviation(d, getColumnByLetter("T"), meanT);
+        document.getElementById("sat8Mean").textContent = meanT.toFixed(2);
+        document.getElementById(
+          "sat8StdDev"
+        ).textContent = `(s=${stdDevT.toFixed(2)})`;
         renderOrderedChart(d, "T", "sat8Chart", satOrder);
+
+        const meanU = getMeanScore(d, getColumnByLetter("U"));
+        const stdDevU = getStandardDeviation(d, getColumnByLetter("U"), meanU);
+        document.getElementById("sat9Mean").textContent = meanU.toFixed(2);
+        document.getElementById(
+          "sat9StdDev"
+        ).textContent = `(s=${stdDevU.toFixed(2)})`;
         renderOrderedChart(d, "U", "sat9Chart", satOrder);
+
+        const meanV = getMeanScore(d, getColumnByLetter("V"));
+        const stdDevV = getStandardDeviation(d, getColumnByLetter("V"), meanV);
+        document.getElementById("sat10Mean").textContent = meanV.toFixed(2);
+        document.getElementById(
+          "sat10StdDev"
+        ).textContent = `(s=${stdDevV.toFixed(2)})`;
         renderOrderedChart(d, "V", "sat10Chart", satOrder);
+
+        const meanW = getMeanScore(d, getColumnByLetter("W"));
+        const stdDevW = getStandardDeviation(d, getColumnByLetter("W"), meanW);
+        document.getElementById("sat11Mean").textContent = meanW.toFixed(2);
+        document.getElementById(
+          "sat11StdDev"
+        ).textContent = `(s=${stdDevW.toFixed(2)})`;
         renderOrderedChart(d, "W", "sat11Chart", satOrder);
+        // ==================================================
+        // END FIX
+        // ==================================================
 
         const interestMapping = {
           5: "Rất quan tâm",
@@ -1313,6 +1721,15 @@
           interestMapping
         );
         renderBarChart(d, "AF", "priceRangeChart");
+
+        // ==================================================
+        // START FIX: TÍNH TOÁN VÀ HIỂN THỊ MEAN & SD CHO CÂU 14
+        // ==================================================
+        const interestCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
+        renderMeanList(d, interestCols, "interestMeanList");
+        // ==================================================
+        // END FIX
+        // ==================================================
 
         const expCols = ["Y", "Z", "AA", "AB", "AC", "AD", "AE"];
         renderMultiColChart(d, expCols, "expActivitiesChart");
@@ -1379,11 +1796,65 @@
                         }%; background: ${colors[i % colors.length]}"></div>
                     </div>
                 </div>
-            `
+              `
           )
           .join("");
         document.getElementById(elementId).innerHTML = html;
       }
+
+      // ============================================================
+      // START FIX: HÀM MỚI ĐỂ HIỂN THỊ DANH SÁCH ĐIỂM MEAN & SD
+      // ============================================================
+      function renderMeanList(data, colLetters, elementId) {
+        const container = document.getElementById(elementId);
+        if (!container) return;
+
+        const meanData = colLetters
+          .map((letter) => {
+            const colName = getColumnByLetter(letter);
+            if (!colName) return null;
+
+            const labelMatch = colName.match(/\[(.*?)\]/);
+            const label = labelMatch ? labelMatch[1] : colName;
+            const mean = getMeanScore(data, colName); // Tính Mean
+            const stdDev = getStandardDeviation(data, colName, mean); // Tính SD
+            return { label, mean, stdDev }; // Trả về cả 2
+          })
+          .filter((item) => item && item.mean > 0)
+          .sort((a, b) => b.mean - a.mean); // Sắp xếp theo điểm TB cao nhất
+
+        const maxMean = 5; // Điểm tối đa là 5
+
+        const html = meanData
+          .map(
+            ({ label, mean, stdDev }, i) => `
+              <div class="mb-2">
+                <div class="flex justify-between mb-1">
+                  <span class="font-medium text-sm text-gray-800">${label}</span>
+                  <div class="flex items-baseline flex-shrink-0 ml-2">
+                    <span class="text-sm text-gray-900 font-bold" title="Điểm trung bình">${mean.toFixed(
+                      2
+                    )}</span>
+                    <span class="text-xs text-gray-500 font-medium ml-1" title="Độ lệch chuẩn">(s=${stdDev.toFixed(
+                      2
+                    )})</span>
+                  </div>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: ${
+                    (mean / maxMean) * 100
+                  }%; background: ${colors[i % colors.length]}"></div>
+                </div>
+              </div>
+            `
+          )
+          .join("");
+
+        container.innerHTML = html;
+      }
+      // ============================================================
+      // END FIX
+      // ============================================================
 
       function renderPieChart(data, colLetter, canvasId, type) {
         const colName = getColumnByLetter(colLetter);
@@ -1501,9 +1972,12 @@
           data.forEach((row) => {
             const val = row[colName];
             const valLower = String(val).toLowerCase();
+            // CHỈ ĐẾM CÁC CÂU TRẢ LỜI QUAN TÂM
             if (
               val &&
-              (valLower.includes("quan tâm") || valLower.includes("có"))
+              (valLower.includes("quan tâm") ||
+                valLower === "4" ||
+                valLower === "5")
             ) {
               const activityMatch = colName.match(/\[(.*?)\]/);
               if (activityMatch) {
@@ -1563,27 +2037,28 @@
 
             if (hasMeaningfulFeeling || hasMeaningfulSuggestion) {
               return `
-                        <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
-                            <div class="flex items-start gap-3 mb-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
-                                <div class="text-gray-700 text-sm leading-relaxed w-full">
-                                    <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
-                                    <p class="mt-1">${
-                                      feeling || "<em>(Không có)</em>"
-                                    }</p>
+                                <div class="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border-l-4 border-purple-500 shadow-sm">
+                                    <div class="flex items-start gap-3 mb-3">
+                                        <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Cảm nhận">😊</span>
+                                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                                            <strong class="text-gray-900">Cảm nhận chuyến đi:</strong>
+                                            <p class="mt-1">${
+                                              feeling || "<em>(Không có)</em>"
+                                            }</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start gap-3">
+                                        <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
+                                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                                            <strong class="text-gray-900">Đề xuất:</strong>
+                                            <p class="mt-1">${
+                                              suggestion ||
+                                              "<em>(Không có)</em>"
+                                            }</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <span class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm" title="Đề xuất">💡</span>
-                                <div class="text-gray-700 text-sm leading-relaxed w-full">
-                                    <strong class="text-gray-900">Đề xuất:</strong>
-                                    <p class="mt-1">${
-                                      suggestion || "<em>(Không có)</em>"
-                                    }</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                              `;
             }
             return "";
           })
@@ -1740,8 +2215,28 @@
       }
 
       function exportSummary() {
+        // ==================================================
+        // START FIX: CẬP NHẬT HÀM XUẤT BÁO CÁO VỚI SD
+        // ==================================================
+        const satMeanElement = document.getElementById("satisfactionRate");
+        const satMeanText =
+          satMeanElement.textContent || satMeanElement.innerText;
+        const interestMeanList = document.getElementById("interestMeanList");
+        let interestSummary = "N/A";
+
+        if (interestMeanList && interestMeanList.children.length > 0) {
+          const topItem = interestMeanList.children[0];
+          const topLabel = topItem.querySelector(".font-medium").textContent;
+          const topScoreText =
+            topItem.querySelector(".flex-shrink-0").innerText;
+          interestSummary = `${topLabel} (Điểm: ${topScoreText.replace(
+            "\n",
+            " "
+          )})`;
+        }
+
         const summary = `
-    BÁOCÁO TÓM TẮT KHẢO SÁT
+    BÁO CÁO TÓM TẮT KHẢO SÁT
     Phát triển sản phẩm du lịch nông nghiệp trải nghiệm tại Làng hoa Sa Đéc, tỉnh Đồng Tháp
 
     ═══════════════════════════════════════════════════════
@@ -1752,7 +2247,7 @@
     • Nhóm tuổi phổ biến: ${
       document.getElementById("popularAgeGroup").textContent
     }
-    • Tỷ lệ hài lòng: ${document.getElementById("satisfactionRate").textContent}
+    • Điểm hài lòng (Tổng thể): ${satMeanText.replace("\n", " ")}
     • Sẵn sàng quay lại: ${document.getElementById("returnRate").textContent}
 
     📈 NHỮNG PHÁT HIỆN CHÍNH
@@ -1766,6 +2261,7 @@
     • Mức giá chấp nhận (trung bình): ${
       document.getElementById("avgPrice").textContent
     }
+    • Hoạt động được quan tâm nhất: ${interestSummary}
 
     ═══════════════════════════════════════════════════════
 
@@ -1776,17 +2272,18 @@
     1. MỨC ĐỘ QUAN TÂM: Du khách có mức độ quan tâm cao đến các hoạt động
        trải nghiệm nông nghiệp tại Làng hoa Sa Đéc.
 
-    2. TIỀM NĂNG PHÁT TRIỂN: Với tỷ lệ hài lòng và dự định quay lại cao,
-       đây là cơ hội tốt để phát triển các sản phẩm du lịch trải nghiệm.
+    2. TIỀM NĂNG PHÁT TRIỂN: Với điểm hài lòng tổng thể tốt và tỷ lệ
+       sẵn sàng quay lại cao, đây là cơ hội lớn để phát triển
+       sản phẩm du lịch trải nghiệm.
 
     3. MỨC GIÁ HỢP LÝ: Du khách sẵn sàng chi trả với mức giá trung bình
        phù hợp cho các gói trải nghiệm 2-3 tiếng.
 
-    4. ĐỀ XUẤT PHÁT TRIỂN:
-       - Đa dạng hóa các hoạt động trải nghiệm
-       - Cải thiện cơ sở hạ tầng và dịch vụ
-       - Tăng cường đào tạo nhân viên và nông dân địa phương
-       - Quảng bá rộng rãi trên các kênh truyền thông
+    4. ĐỀ XUẤT PHÁT TRIỂN (Dựa trên điểm TB cao nhất):
+       - Phát triển các hoạt động được quan tâm nhất: ${interestSummary}.
+       - Cải thiện các yếu tố có điểm hài lòng thấp (kiểm tra tab "Mức độ hài lòng").
+       - Tăng cường đào tạo nhân viên và nông dân địa phương.
+       - Quảng bá rộng rãi trên các kênh truyền thông.
 
     ═══════════════════════════════════════════════════════
 
@@ -1794,6 +2291,9 @@
     Trường Đại học Công Nghiệp TP.HCM - Khoa Thương mại - Du lịch
     Ngày xuất: ${new Date().toLocaleDateString("vi-VN")}
         `;
+        // ==================================================
+        // END FIX
+        // ==================================================
 
         const blob = new Blob([summary], { type: "text/plain;charset=utf-8" });
         const url = URL.createObjectURL(blob);
