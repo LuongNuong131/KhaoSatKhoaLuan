@@ -464,6 +464,28 @@
         transform: translateY(-4px);
         box-shadow: 0 8px 20px rgba(102, 126, 234, 0.6);
       }
+
+      /* Thêm style cho thông báo export */
+      @keyframes slideIn {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOut {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body class="min-h-screen p-4 md:p-8">
@@ -1404,16 +1426,16 @@
         } catch (error) {
           console.error("❌ Lỗi chi tiết:", error);
           loadingOverlay.innerHTML = `
-              <div class="text-center px-6">
-                <div class="text-6xl mb-4">⚠️</div>
-                <p class="text-white text-xl font-bold mb-2">Không thể tải dữ liệu!</p>
-                <p class="text-white/80 text-sm mb-4">${error.message}</p>
-                <p class="text-white/60 text-xs">Hãy đảm bảo file 'data.json' nằm cùng thư mục với file HTML này.</p>
-                <button onclick="location.reload()" class="mt-6 px-6 py-3 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition">
-                  🔄 Thử lại
-                </button>
-              </div>
-            `;
+                <div class="text-center px-6">
+                  <div class="text-6xl mb-4">⚠️</div>
+                  <p class="text-white text-xl font-bold mb-2">Không thể tải dữ liệu!</p>
+                  <p class="text-white/80 text-sm mb-4">${error.message}</p>
+                  <p class="text-white/60 text-xs">Hãy đảm bảo file 'data.json' nằm cùng thư mục với file HTML này.</p>
+                  <button onclick="location.reload()" class="mt-6 px-6 py-3 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition">
+                    🔄 Thử lại
+                  </button>
+                </div>
+              `;
         }
       }
 
@@ -1450,6 +1472,23 @@
       // ===================================================================
       // PHẦN 2: CÁC HÀM TÍNH TOÁN (MEAN VÀ ĐỘ LỆCH CHUẨN)
       // ===================================================================
+
+      /**
+       * FIX: Thêm hàm helper quan trọng này
+       * Hàm này lấy tên cột thực tế (ví dụ: "1. Giới tính:") từ chữ cái (ví dụ: "B")
+       */
+      function getColumnByLetter(letter) {
+        if (Object.keys(columnMapping).length === 0) {
+          console.error("Column mapping chưa được tải!");
+          return null;
+        }
+        const colName = columnMapping[letter];
+        if (!colName) {
+          console.warn(`Không tìm thấy mapping cho chữ cái: ${letter}`);
+          return null;
+        }
+        return colName;
+      }
 
       function getMeanScore(data, colName) {
         let totalScore = 0;
@@ -1497,7 +1536,7 @@
       // ===================================================================
 
       /**
-       * Sửa lỗi:
+       * FIX:
        * 1. Đã xóa 'parseFloat' vì 'returnRate', 'expRate', 'refRate' đã là SỐ (number).
        * 2. Đã thêm '.toFixed(1) + "%"' vào phần text để hiển thị đẹp.
        */
@@ -1603,11 +1642,11 @@
           container.innerHTML = insights
             .map(
               (insight) => `
-              <div class="insight-card">
-                <h4>${insight.icon} ${insight.title}</h4>
-                <p>${insight.text}</p>
-              </div>
-            `
+                <div class="insight-card">
+                  <h4>${insight.icon} ${insight.title}</h4>
+                  <p>${insight.text}</p>
+                </div>
+              `
             )
             .join("");
         }
@@ -1618,11 +1657,12 @@
       // ===================================================================
 
       /**
-       * Sửa lỗi:
+       * FIX:
        * 1. Đã thay thế TOÀN BỘ các chuỗi hardcode (ví dụ: "2. Độ tuổi:")
        * bằng cách gọi 'getColumnByLetter' (ví dụ: 'ageCol').
        * 2. Đã sửa logic truyền dữ liệu vào 'generateInsights',
        * truyền SỐ (number) thay vì chuỗi (string).
+       * 3. Sửa logic popularAgeGroup, expYes, priceRanges
        */
       function processAllData() {
         const d = globalData;
@@ -1646,21 +1686,24 @@
 
         const ageCounts = {};
         d.forEach((row) => {
-          // Sửa lỗi: Dùng ageCol
+          // FIX: Dùng ageCol
           const ageGroup = row[ageCol];
           if (ageGroup) ageCounts[ageGroup] = (ageCounts[ageGroup] || 0) + 1;
         });
 
-        let popularAgeGroup = "N/A",
+        // FIX: Sửa logic để xử lý trường hợp bằng nhau
+        let popularAgeGroups = [],
           maxCount = 0;
         for (const ageGroup in ageCounts) {
           if (ageCounts[ageGroup] > maxCount) {
             maxCount = ageCounts[ageGroup];
-            popularAgeGroup = ageGroup;
+            popularAgeGroups = [ageGroup];
+          } else if (ageCounts[ageGroup] === maxCount) {
+            popularAgeGroups.push(ageGroup);
           }
         }
         document.getElementById("popularAgeGroup").textContent =
-          popularAgeGroup;
+          popularAgeGroups.length > 0 ? popularAgeGroups.join(" & ") : "N/A";
 
         // Tính Mean và SD tổng thể (Câu 12)
         const satKeys = ["M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"];
@@ -1708,15 +1751,15 @@
         const overallStdDev = Math.sqrt(overallVariance);
 
         document.getElementById("satisfactionRate").innerHTML = `
-            <span title="Điểm trung bình">${overallMean.toFixed(2)}</span>
-            <span class="text-xl text-gray-500" title="Độ lệch chuẩn">(s=${overallStdDev.toFixed(
-              2
-            )})</span>
-          `;
+              <span title="Điểm trung bình">${overallMean.toFixed(2)}</span>
+              <span class="text-xl text-gray-500" title="Độ lệch chuẩn">(s=${overallStdDev.toFixed(
+                2
+              )})</span>
+            `;
 
         // Phân tích các thẻ thống kê
         const returnYes = d.filter((row) => {
-          // Sửa lỗi: Dùng returnCol
+          // FIX: Dùng returnCol
           const val = row[returnCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
@@ -1724,20 +1767,15 @@
         }).length;
 
         const expYes = d.filter((row) => {
-          // Sửa lỗi: Dùng expCol
+          // FIX: Dùng expCol và sửa logic đếm
           const val = row[expCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
-          return (
-            valLower.includes("quan tâm") ||
-            valLower.includes("rất") ||
-            valLower === "4" ||
-            valLower === "5"
-          );
+          return valLower === "quan tâm" || valLower === "rất quan tâm";
         }).length;
 
         const refYes = d.filter((row) => {
-          // Sửa lỗi: Dùng refCol
+          // FIX: Dùng refCol
           const val = row[refCol];
           if (!val) return false;
           const valLower = String(val).toLowerCase();
@@ -1746,7 +1784,7 @@
           );
         }).length;
 
-        // Sửa lỗi logic: Tính toán SỐ, sau đó mới định dạng chuỗi
+        // FIX: Tính toán SỐ, sau đó mới định dạng chuỗi
         const returnRateNum = (returnYes / d.length) * 100;
         const expRateNum = (expYes / d.length) * 100;
         const refRateNum = (refYes / d.length) * 100;
@@ -1759,17 +1797,18 @@
         document.getElementById("referralPercent").textContent =
           refRateNum.toFixed(1) + "%";
 
+        // FIX: Sửa key của priceRanges để khớp với data.json
         const priceRanges = {
-          "100.000 - 200.000 vnđ": 150000,
-          "200.000 - 300.000 vnđ": 250000,
-          "trên 300.000 vnđ": 350000,
-          "dưới 100.000 vnđ": 80000,
+          "100.000 - 200.000 VNĐ": 150000,
+          "200.000 - 300.000 VNĐ": 250000,
+          "Trên 300.000 VNĐ": 350000,
+          "Dưới 100.000 VNĐ": 80000,
         };
         let totalPrice = 0,
           priceCount = 0;
         d.forEach((row) => {
-          // Sửa lỗi: Dùng priceCol
-          const val = String(row[priceCol] || "").toLowerCase();
+          // FIX: Dùng priceCol và không .toLowerCase()
+          const val = String(row[priceCol] || "").trim();
           if (val && priceRanges[val]) {
             totalPrice += priceRanges[val];
             priceCount++;
@@ -1780,10 +1819,10 @@
         document.getElementById("avgPrice").textContent =
           avgPrice > 0 ? (avgPrice / 1000).toFixed(0) + "K VNĐ" : "N/A";
 
-        // Sửa lỗi: Truyền SỐ (number) vào 'generateInsights'
+        // FIX: Truyền SỐ (number) vào 'generateInsights'
         generateInsights(d, overallMean, returnRateNum, expRateNum, refRateNum);
 
-        // Sửa lỗi: Dùng tên cột đã lấy
+        // FIX: Dùng tên cột đã lấy
         renderTopList(d, occupationCol, "topOccupations");
         renderTopList(d, locationCol, "topLocations");
         // --- Kết thúc phần refactor ---
@@ -1882,6 +1921,11 @@
           3: "Bình thường",
           2: "Không sẵn lòng",
           1: "Chắc chắn không",
+          Có: "Có",
+          "Chắc chắn có": "Chắc chắn có",
+          "Chưa chắc chắn/Còn phân vân": "Chưa chắc chắn/Còn phân vân",
+          Không: "Không",
+          "Hoàn toàn không": "Hoàn toàn không",
         };
         renderMappedPieChart(
           d,
@@ -1895,22 +1939,11 @@
       }
 
       // ===================================================================
-      // PHẦN 5: CÁC HÀM VẼ BIỂU ĐỒ
+      // PHẦN 5: CÁC HÀM VẼ BIỂU ĐỒ (ĐÃ SỬA LỖI)
       // ===================================================================
 
-      function getColumnByLetter(letter) {
-        if (Object.keys(columnMapping).length === 0) {
-          console.error("Column mapping chưa được tải!");
-          return null;
-        }
-        const colName = columnMapping[letter];
-        if (!colName) {
-          console.warn(`Không tìm thấy mapping cho chữ cái: ${letter}`);
-          return null;
-        }
-        return colName;
-      }
-
+      // FIX: Sửa lại hàm này để chấp nhận colName trực tiếp
+      // (Hàm gọi trong processAllData đã được sửa)
       function renderTopList(data, colName, elementId, top = 5) {
         if (!colName) return;
         const counts = {};
@@ -1926,21 +1959,21 @@
         const html = sorted
           .map(
             ([label, count], i) => `
-                  <div class="top-item mb-3">
-                      <div class="flex justify-between mb-2">
-                          <span class="font-semibold text-sm text-gray-800">${label}</span>
-                          <span class="text-sm text-purple-600 font-bold">${count} người (${(
+                    <div class="top-item mb-3">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-semibold text-sm text-gray-800">${label}</span>
+                            <span class="text-sm text-purple-600 font-bold">${count} người (${(
               (count / data.length) *
               100
             ).toFixed(1)}%)</span>
-                      </div>
-                      <div class="progress-bar">
-                          <div class="progress-fill" style="width: ${
-                            (count / max) * 100
-                          }%; background: ${colors[i % colors.length]}"></div>
-                      </div>
-                  </div>
-                `
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${
+                              (count / max) * 100
+                            }%; background: ${colors[i % colors.length]}"></div>
+                        </div>
+                    </div>
+                  `
           )
           .join("");
         document.getElementById(elementId).innerHTML = html;
@@ -1969,31 +2002,32 @@
         const html = meanData
           .map(
             ({ label, mean, stdDev }, i) => `
-                  <div class="top-item mb-3">
-                    <div class="flex justify-between mb-2">
-                      <span class="font-semibold text-sm text-gray-800">${label}</span>
-                      <div class="flex items-baseline flex-shrink-0 ml-2">
-                        <span class="text-sm text-purple-600 font-bold" title="Điểm trung bình">${mean.toFixed(
-                          2
-                        )}</span>
-                        <span class="text-xs text-gray-500 font-medium ml-1" title="Độ lệch chuẩn">(s=${stdDev.toFixed(
-                          2
-                        )})</span>
+                    <div class="top-item mb-3">
+                      <div class="flex justify-between mb-2">
+                        <span class="font-semibold text-sm text-gray-800">${label}</span>
+                        <div class="flex items-baseline flex-shrink-0 ml-2">
+                          <span class="text-sm text-purple-600 font-bold" title="Điểm trung bình">${mean.toFixed(
+                            2
+                          )}</span>
+                          <span class="text-xs text-gray-500 font-medium ml-1" title="Độ lệch chuẩn">(s=${stdDev.toFixed(
+                            2
+                          )})</span>
+                        </div>
+                      </div>
+                      <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${
+                          (mean / maxMean) * 100
+                        }%; background: ${colors[i % colors.length]}"></div>
                       </div>
                     </div>
-                    <div class="progress-bar">
-                      <div class="progress-fill" style="width: ${
-                        (mean / maxMean) * 100
-                      }%; background: ${colors[i % colors.length]}"></div>
-                    </div>
-                  </div>
-                `
+                  `
           )
           .join("");
 
         container.innerHTML = html;
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderPieChart(data, colLetter, canvasId, type) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -2016,6 +2050,7 @@
         );
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderBarChart(data, colLetter, canvasId, sort = false) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -2041,6 +2076,7 @@
         );
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderOrderedChart(data, colLetter, canvasId, order) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -2052,16 +2088,19 @@
 
         const counts = {};
         data.forEach((row) => {
-          const val = row[colName];
+          const val = String(row[colName] || "")
+            .trim()
+            .toLowerCase();
           if (val) counts[val] = (counts[val] || 0) + 1;
         });
 
         const labels = order;
-        const values = order.map((label) => counts[label] || 0);
+        const values = order.map((label) => counts[label.toLowerCase()] || 0);
 
         createChart(canvasId, "bar", labels, values, false);
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderMultiChart(data, colLetter, canvasId) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -2091,6 +2130,7 @@
         );
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderFeedbackList(
         data,
         feelingColLetter,
@@ -2128,29 +2168,29 @@
 
             if (hasMeaningfulFeeling || hasMeaningfulSuggestion) {
               return `
-                  <div class="feedback-card p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-l-4 border-purple-500 shadow-md">
-                      <div class="flex items-start gap-4 mb-4">
-                          <span class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md" title="Cảm nhận">😊</span>
-                          <div class="text-gray-700 text-sm leading-relaxed w-full">
-                              <strong class="text-gray-900 text-base">💭 Cảm nhận chuyến đi:</strong>
-                              <p class="mt-2 text-gray-800">${
-                                feeling ||
-                                "<em class='text-gray-400'>(Không có)</em>"
-                              }</p>
-                          </div>
-                      </div>
-                      <div class="flex items-start gap-4 pt-4 border-t border-gray-200">
-                          <span class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md" title="Đề xuất">💡</span>
-                          <div class="text-gray-700 text-sm leading-relaxed w-full">
-                              <strong class="text-gray-900 text-base">📝 Đề xuất cải thiện:</strong>
-                              <p class="mt-2 text-gray-800">${
-                                suggestion ||
-                                "<em class='text-gray-400'>(Không có)</em>"
-                              }</p>
-                          </div>
-                      </div>
-                  </div>
-                `;
+                <div class="feedback-card p-5 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-l-4 border-purple-500 shadow-md">
+                    <div class="flex items-start gap-4 mb-4">
+                        <span class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md" title="Cảm nhận">😊</span>
+                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                            <strong class="text-gray-900 text-base">💭 Cảm nhận chuyến đi:</strong>
+                            <p class="mt-2 text-gray-800">${
+                              feeling ||
+                              "<em class='text-gray-400'>(Không có)</em>"
+                            }</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 pt-4 border-t border-gray-200">
+                        <span class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md" title="Đề xuất">💡</span>
+                        <div class="text-gray-700 text-sm leading-relaxed w-full">
+                            <strong class="text-gray-900 text-base">📝 Đề xuất cải thiện:</strong>
+                            <p class="mt-2 text-gray-800">${
+                              suggestion ||
+                              "<em class='text-gray-400'>(Không có)</em>"
+                            }</p>
+                        </div>
+                    </div>
+                </div>
+              `;
             }
             return "";
           })
@@ -2162,6 +2202,7 @@
             : '<div class="text-center py-12 bg-gray-50 rounded-xl"><p class="text-gray-500 text-lg">📭 Chưa có cảm nhận hoặc đề xuất nào.</p></div>';
       }
 
+      // FIX: Thêm logic getColumnByLetter
       function renderMappedPieChart(data, colLetter, canvasId, type, mapping) {
         const colName = getColumnByLetter(colLetter);
         if (!colName) {
@@ -2194,13 +2235,53 @@
         const finalLabels = [];
         const finalValues = [];
         for (const label of orderedLabels) {
-          if (counts[label] > 0) {
+          // Chỉ thêm vào biểu đồ nếu có giá trị VÀ mapping có key đó
+          if (counts[label] > 0 && Object.values(mapping).includes(label)) {
             finalLabels.push(label);
             finalValues.push(counts[label]);
           }
         }
 
-        createChart(canvasId, type, finalLabels, finalValues, true);
+        // Sắp xếp lại finalLabels cho Câu 18 (AI) và 13 (X)
+        if (colLetter === "AI" || colLetter === "X") {
+          const desiredOrder =
+            colLetter === "AI"
+              ? [
+                  "Chắc chắn có",
+                  "Có",
+                  "Chưa chắc chắn/Còn phân vân",
+                  "Không",
+                  "Hoàn toàn không",
+                ]
+              : [
+                  "Rất quan tâm",
+                  "Quan tâm",
+                  "Bình thường",
+                  "Không quan tâm",
+                  "Hoàn toàn không quan tâm",
+                ];
+
+          const sortedData = finalLabels
+            .map((label, index) => ({
+              label: label,
+              value: finalValues[index],
+            }))
+            .sort((a, b) => {
+              return (
+                desiredOrder.indexOf(a.label) - desiredOrder.indexOf(b.label)
+              );
+            });
+
+          createChart(
+            canvasId,
+            type,
+            sortedData.map((d) => d.label),
+            sortedData.map((d) => d.value),
+            true
+          );
+        } else {
+          createChart(canvasId, type, finalLabels, finalValues, true);
+        }
       }
 
       function createChart(
@@ -2357,9 +2438,11 @@
 
         const summary = `
       ╔════════════════════════════════════════════════════════════════════╗
-      ║                 BÁO CÁO TÓM TẮT KHẢO SÁT DU LỊCH                 ║
-      ║           Phát triển sản phẩm du lịch nông nghiệp trải nghiệm            ║
+      ║                                                                    ║
+      ║                   BÁO CÁO TÓM TẮT KHẢO SÁT DU LỊCH                   ║
+      ║         Phát triển sản phẩm du lịch nông nghiệp trải nghiệm          ║
       ║                Làng hoa Sa Đéc, tỉnh Đồng Tháp                       ║
+      ║                                                                    ║
       ╚════════════════════════════════════════════════════════════════════╝
 
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -2443,11 +2526,11 @@
       📌 THÔNG TIN BÁO CÁO
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-        Nguồn:      Dashboard Phân Tích Khảo Sát
-        Đơn vị:      Trường Đại học Công Nghiệp TP.HCM
-        Khoa:        Thương mại - Du lịch
-        Ngành:       Quản trị dịch vụ du lịch và lữ hành
-        Ngày xuất:   ${new Date().toLocaleDateString("vi-VN", {
+        Nguồn:     Dashboard Phân Tích Khảo Sát
+        Đơn vị:     Trường Đại học Công Nghiệp TP.HCM
+        Khoa:       Thương mại - Du lịch
+        Ngành:      Quản trị dịch vụ du lịch và lữ hành
+        Ngày xuất:  ${new Date().toLocaleDateString("vi-VN", {
           weekday: "long",
           year: "numeric",
           month: "long",
@@ -2455,7 +2538,7 @@
         })}
 
       ╚════════════════════════════════════════════════════════════════════╝
-          `;
+        `;
 
         const blob = new Blob([summary], {
           type: "text/plain;charset=utf-8",
@@ -2492,32 +2575,6 @@
           setTimeout(() => notification.remove(), 300);
         }, 3000);
       }
-
-      // Add animation keyframes
-      const style = document.createElement("style");
-      style.textContent = `
-          @keyframes slideIn {
-            from {
-              transform: translateX(400px);
-              opacity: 0;
-            }
-            to {
-              transform: translateX(0);
-              opacity: 1;
-            }
-          }
-          @keyframes slideOut {
-            from {
-              transform: translateX(0);
-              opacity: 1;
-            }
-            to {
-              transform: translateX(400px);
-              opacity: 0;
-            }
-          }
-        `;
-      document.head.appendChild(style);
     </script>
   </body>
 </html>
